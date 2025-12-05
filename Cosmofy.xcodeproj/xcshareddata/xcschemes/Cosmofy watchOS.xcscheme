@@ -17,7 +17,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0BDBC9C82C1D956E00F720F2"
                BuildableName = "Cosmofy.app"
-               BlueprintName = "Cosmofy watchOS"
+               BlueprintName = "watchOS"
                ReferencedContainer = "container:Cosmofy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -60,7 +60,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BDBC9C82C1D956E00F720F2"
             BuildableName = "Cosmofy.app"
-            BlueprintName = "Cosmofy watchOS"
+            BlueprintName = "watchOS"
             ReferencedContainer = "container:Cosmofy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -77,7 +77,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BDBC9C82C1D956E00F720F2"
             BuildableName = "Cosmofy.app"
-            BlueprintName = "Cosmofy watchOS"
+            BlueprintName = "watchOS"
             ReferencedContainer = "container:Cosmofy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

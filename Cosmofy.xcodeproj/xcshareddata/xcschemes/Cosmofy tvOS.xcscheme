@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0B9953722CE5439200124D68"
-               BuildableName = "Cosmofy tvOS.app"
-               BlueprintName = "Cosmofy tvOS"
+               BuildableName = "tvOS.app"
+               BlueprintName = "tvOS"
                ReferencedContainer = "container:Cosmofy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B9953722CE5439200124D68"
-            BuildableName = "Cosmofy tvOS.app"
-            BlueprintName = "Cosmofy tvOS"
+            BuildableName = "tvOS.app"
+            BlueprintName = "tvOS"
             ReferencedContainer = "container:Cosmofy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B9953722CE5439200124D68"
-            BuildableName = "Cosmofy tvOS.app"
-            BlueprintName = "Cosmofy tvOS"
+            BuildableName = "tvOS.app"
+            BlueprintName = "tvOS"
             ReferencedContainer = "container:Cosmofy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
