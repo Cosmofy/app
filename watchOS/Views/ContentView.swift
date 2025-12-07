@@ -67,13 +67,13 @@ struct ContentView: View {
                 NavigationLink(destination: SwiftView()) {
                     VStack {
                         HStack {
-                            Image("swift")
+                            Image("livia")
                                 .resizable()
                                 .frame(width: 30, height: 30)
                             Spacer()
                         }
                         HStack {
-                            Text("Swift")
+                            Text("Livia")
                                 .multilineTextAlignment(.leading)
                                 .font(.caption)
                             Spacer()

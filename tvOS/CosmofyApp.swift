@@ -37,7 +37,7 @@ struct TabBarView: View {
 
             SwiftView()
                 .tabItem {
-                    Label("Swift", image: "tab-bar-swift")
+                    Label("Livia", image: "tab-bar-livia")
                 }
 
             RNNMaybach(viewModel: gqlViewModel, complete: $gqlViewModel.eventsLoaded, failed: $gqlViewModel.eventsFailed)

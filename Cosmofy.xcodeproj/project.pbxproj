@@ -37,7 +37,6 @@
 		0B8FC0D72EE2287700C11102 /* MacSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FC0C92EE2287700C11102 /* MacSwiftView.swift */; };
 		0B8FC0D92EE2287700C11102 /* MacNatureScopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FC0C72EE2287700C11102 /* MacNatureScopeView.swift */; };
 		0B8FC0DA2EE2287700C11102 /* MacHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FC0C62EE2287700C11102 /* MacHomeView.swift */; };
-		0B8FC0DC2EE2287700C11102 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FC0CF2EE2287700C11102 /* Info.plist */; };
 		0B8FC0E52EE2298600C11102 /* API_OPENAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FC0E02EE2298600C11102 /* API_OPENAI.swift */; };
 		0B8FC0E62EE2298600C11102 /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FC0E32EE2298600C11102 /* Queries.swift */; };
 		0B8FC0E72EE2298600C11102 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FC0E22EE2298600C11102 /* Models.swift */; };
@@ -129,14 +128,17 @@
 		0BFDE74F2C2EBDAF00E8B3FB /* iPadPlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFDE74E2C2EBDAF00E8B3FB /* iPadPlanetView.swift */; };
 		0BFDE7502C2EE61500E8B3FB /* CosmofyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDBC9CB2C1D956E00F720F2 /* CosmofyApp.swift */; };
 		0BFF74672B76FE0B0079A71A /* PlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFF74662B76FE0B0079A71A /* PlanetView.swift */; };
+		0BFFDA692EE37CC400A4EC46 /* VTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 0BFFDA682EE37CC400A4EC46 /* VTabView */; };
 		0BGQLVM_IOS2EE3000000003 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
 		0BGQLVM_TVOS2EE3000000004 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
 		0BGQLVM_WATCHOS2EE3000005 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
+		0BMACICON2EE2AE240007129B /* Logo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB495B2EE2AE240007129B /* Logo.icon */; };
 		0BMACOS012EE2298700C11102 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7D18BE2AE8A482009C2317 /* MessageRow.swift */; };
 		0BMACOS022EE2298700C11102 /* Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7671962AE4C3FE008E57B2 /* Swift.swift */; };
 		0BMACOS032EE2298700C11102 /* MapHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBAC7422C4E779A00DE4C85 /* MapHelpers.swift */; };
 		0BMACOS052EE2298700C11102 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB14A4C2B9C2EB000476F3C /* Color+Hex.swift */; };
 		0BMACOS062EE2298700C11102 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
+		0BMACOS072EE2302000C11102 /* PlanetNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC4295EC08100F7EE98 /* PlanetNode.swift */; };
 		2F4F8FC2295EBC5100F7EE98 /* StarsParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC0295EBC5100F7EE98 /* StarsParticleSystem.scnp */; };
 		2F4F8FC3295EBC5100F7EE98 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC1295EBC5100F7EE98 /* star.png */; };
 		2F4F8FC5295EC08100F7EE98 /* PlanetNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC4295EC08100F7EE98 /* PlanetNode.swift */; };
@@ -269,6 +271,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BFFDA692EE37CC400A4EC46 /* VTabView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +576,13 @@
 			path = Kids;
 			sourceTree = "<group>";
 		};
+		0BFFDA672EE37CC400A4EC46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2FBBB64C2945531500BBB072 = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +598,7 @@
 				0BAB49652EE2AFE60007129B /* Cosmofy.app */,
 				0BAB49662EE2AFEA0007129B /* tvOS.app */,
 				0BF49B452EE33565009BF1F2 /* Cosmofy.app */,
+				0BFFDA672EE37CC400A4EC46 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -620,6 +631,7 @@
 			);
 			name = macOS;
 			packageProductDependencies = (
+				0BFFDA682EE37CC400A4EC46 /* VTabView */,
 			);
 			productName = macOS;
 			productReference = 0BAB49652EE2AFE60007129B /* Cosmofy.app */;
@@ -743,7 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BAB49632EE2AFCB0007129B /* Assets.xcassets in Resources */,
-				0B8FC0DC2EE2287700C11102 /* Info.plist in Resources */,
+				0BMACICON2EE2AE240007129B /* Logo.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,6 +837,7 @@
 				0BMACOS052EE2298700C11102 /* Color+Hex.swift in Sources */,
 				0B8615A92EE2300000C11102 /* LoadingView.swift in Sources */,
 				0B8615AA2EE2301000C11102 /* Planet.swift in Sources */,
+				0BMACOS072EE2302000C11102 /* PlanetNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,7 +961,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 902;
 				DEVELOPMENT_TEAM = 6C6Q6AQ2V8;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
@@ -974,7 +987,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy;
 				PRODUCT_NAME = Cosmofy;
 				REGISTER_APP_GROUPS = YES;
@@ -997,7 +1010,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 902;
 				DEVELOPMENT_TEAM = 6C6Q6AQ2V8;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
@@ -1023,7 +1036,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy;
 				PRODUCT_NAME = Cosmofy;
 				REGISTER_APP_GROUPS = YES;
@@ -1068,11 +1081,11 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "20241113 tvOS App Store Connect";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "20251205 tvOS Profile";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1115,11 +1128,11 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "20241113 tvOS App Store Connect";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=appletvos*]" = "20251205 tvOS Profile";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1143,6 +1156,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = watchOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Cosmofy;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.snape447.Cosmofy;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1151,7 +1165,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy.watchkitapp;
 				PRODUCT_NAME = Cosmofy;
 				SDKROOT = watchos;
@@ -1176,6 +1190,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = watchOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Cosmofy;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.snape447.Cosmofy;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -1184,7 +1199,7 @@
 					"@executable_path/Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy.watchkitapp;
 				PRODUCT_NAME = Cosmofy;
 				SDKROOT = watchos;
@@ -1345,7 +1360,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1386,7 +1401,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.snape447.Cosmofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1521,6 +1536,11 @@
 			productName = MarkdownUI;
 		};
 		0BEFAB9C2C6FAD18007B71B3 /* VTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BEFAB9A2C6FACEB007B71B3 /* XCRemoteSwiftPackageReference "swiftui-vertical-tab-view" */;
+			productName = VTabView;
+		};
+		0BFFDA682EE37CC400A4EC46 /* VTabView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0BEFAB9A2C6FACEB007B71B3 /* XCRemoteSwiftPackageReference "swiftui-vertical-tab-view" */;
 			productName = VTabView;

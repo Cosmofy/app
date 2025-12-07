@@ -24,7 +24,7 @@ struct SwiftView: View {
             }
             
             #if !os(tvOS)
-            .navigationTitle("Livia")
+            .navigationTitle("Swift")
             #endif
             #if os(iOS)
             .onAppear {

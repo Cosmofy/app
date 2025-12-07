@@ -23,7 +23,7 @@ struct SwiftView: View {
                 chatListView
                     .edgesIgnoringSafeArea(.horizontal)
             }
-            .navigationTitle("Swift")
+            .navigationTitle("Livia")
             .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea(edges: .bottom)
         }

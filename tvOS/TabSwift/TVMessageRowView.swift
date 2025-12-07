@@ -44,7 +44,7 @@ struct MessageRowView: View {
                         .frame(width: 35, height: 35)
                     
                     if image == "openai" {
-                        Text("Swift")
+                        Text("Livia")
                             .textCase(.uppercase)
                             .foregroundStyle(.secondary)
                             .font(.caption2)

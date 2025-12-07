@@ -38,7 +38,7 @@ class InteractingViewModel: ObservableObject {
         messages.append(MessageRow(
             isInteractingWithChatGPT: false,
             sendImage: "openai",
-            sendText: "Greetings from Swift! I can provide you with in-depth knowledge and insights about space like never before.",
+            sendText: "Greetings from Livia! I can provide you with in-depth knowledge and insights about space like never before.",
             responseImage: "",
             responseText: nil,
             responseError: nil
@@ -78,7 +78,7 @@ class InteractingViewModel: ObservableObject {
             isInteractingWithChatGPT: true, 
             sendImage: "user",
             sendText: text,
-            responseImage: "swift",
+            responseImage: "livia",
             responseText: streamText,
             responseError: nil
         )
@@ -113,7 +113,7 @@ class API: @unchecked Sendable {
 
     private let graphqlEndpoint = "https://livia.arryan.xyz/graphql"
     private let chatEndpoint = "https://swift.arryan.xyz/v1/chat/completions"
-    private let passphrase = "cosmofy-secret-2024"
+    private let passphrase = "my-phone-passphrase"
 
     private var apiKey: String?
     private var historyList = [Message]()
@@ -148,7 +148,7 @@ class API: @unchecked Sendable {
         ]
     }
 
-    init(model: String = "gpt-4o", systemPrompt: String = "You are a helpful assistant who will answer space/astronomy questions. Your name is Swift. You may answer any other questions. You are in an app called Cosmofy.", temperature: Double = 0.65) {
+    init(model: String = "gpt-4o", systemPrompt: String = "You are a helpful assistant who will answer space/astronomy questions. Your name is Livia. You may answer any other questions. You are in an app called Cosmofy.", temperature: Double = 0.65) {
         self.model = model
         self.systemMessage = .init(role: "system", content: systemPrompt)
         self.temperature = temperature
@@ -156,7 +156,7 @@ class API: @unchecked Sendable {
         fetchApiKey { [weak self] fetchedApiKey in
             self?.apiKey = fetchedApiKey
             AES_Complete = true
-            print("Swift API key fetched: \(fetchedApiKey != nil)")
+            print("livia API key fetched: \(fetchedApiKey != nil)")
         }
     }
 
@@ -200,17 +200,17 @@ class API: @unchecked Sendable {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                    let dataObj = json["data"] as? [String: Any],
                    let apiKey = dataObj["apiKey"] as? String {
-                    print("Swift API key received: \(apiKey.prefix(20))...")
+                    print("livia API key received: \(apiKey.prefix(20))...")
                     completion(apiKey)
                 } else {
-                    print("Swift API key: Invalid response format")
+                    print("livia API key: Invalid response format")
                     if let responseString = String(data: data, encoding: .utf8) {
                         print("Response: \(responseString)")
                     }
                     completion(nil)
                 }
             } catch {
-                print("Swift API key JSON error: \(error.localizedDescription)")
+                print("livia API key JSON error: \(error.localizedDescription)")
                 completion(nil)
             }
         }

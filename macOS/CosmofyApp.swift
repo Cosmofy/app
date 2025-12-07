@@ -2,23 +2,151 @@
 //  CosmofyApp.swift
 //  Cosmofy macOS
 //
-//  Created by Arryan Bhatnagar on 12/4/24.
+//  Created by Arryan Bhatnagar on 3/9/24.
 //
 
+import Foundation
 import SwiftUI
 
 @main
 struct CosmofyMacApp: App {
-    @StateObject private var viewModel = GQLViewModel()
+    @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
 
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: viewModel)
+            SplashScreen()
+                .preferredColorScheme(userTheme.colorScheme)
                 .frame(minWidth: 900, minHeight: 600)
         }
-
         Settings {
             SettingsView()
         }
     }
 }
+
+
+struct SplashScreen: View {
+    @StateObject var gqlViewModel = GQLViewModel()
+    @StateObject var swiftViewModel = InteractingViewModel(api: API())
+
+    @State private var showSplash = true
+    @AppStorage("selectedProfile") var currentSelectedProfile: Int?
+    @AppStorage("signed_in") var currentUserSignedIn: Bool = false
+
+    var body: some View {
+        ZStack {
+            if showSplash {
+                SplashScreenView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now()/* + 2*/) {
+                            withAnimation {
+                                showSplash = false
+                            }
+                        }
+                    }
+            } else if !gqlViewModel.hasLoadedData {
+                NetworkErrorView(isLoading: gqlViewModel.isLoading) {
+                    Task {
+                        await gqlViewModel.fetchAllData()
+                    }
+                }
+            } else {
+                IntroView(gqlViewModel: gqlViewModel)
+                    .environmentObject(swiftViewModel)
+            }
+        }
+    }
+}
+
+struct NetworkErrorView: View {
+    var isLoading: Bool
+    var onRetry: () -> Void
+
+    @State private var healthCheckTask: Task<Void, Never>?
+
+    private let healthEndpoint = "https://livia.arryan.xyz/health"
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text(isLoading ? "Connecting..." : "Can't connect to server")
+                .font(.title2)
+                .fontDesign(.rounded)
+                .fontWeight(.medium)
+
+            ProgressView()
+                .scaleEffect(1.5)
+                .frame(height: 50)
+
+            Button(action: onRetry) {
+                Text("Try Again")
+                    .fontDesign(.rounded)
+                    .fontWeight(.medium)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 32)
+                    .padding(.vertical, 12)
+                    .background(Color.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            .buttonStyle(.plain)
+            .opacity(isLoading ? 0 : 1)
+            .disabled(isLoading)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            startHealthCheck()
+        }
+        .onDisappear {
+            healthCheckTask?.cancel()
+        }
+    }
+
+    private func startHealthCheck() {
+        healthCheckTask = Task {
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
+                if Task.isCancelled || isLoading { continue }
+
+                // Ping health endpoint
+                if let url = URL(string: healthEndpoint) {
+                    do {
+                        let (_, response) = try await URLSession.shared.data(from: url)
+                        if let httpResponse = response as? HTTPURLResponse,
+                           httpResponse.statusCode == 200 {
+                            // Server is up, trigger full data fetch
+                            await MainActor.run {
+                                onRetry()
+                            }
+                        }
+                    } catch {
+                        // Server still down, continue polling
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct SplashScreenView: View {
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(hex: 0xD2DFF7),
+                    Color(hex: 0xE1E8F4),
+                    Color(hex: 0xC8D5F1),
+                    Color(hex: 0xB7C5F4)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+
+            Image("app-icon-4k")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 64, height: 64)
+        }
+    }
+}
+
+// SettingsView is in Views/SettingsView.swift

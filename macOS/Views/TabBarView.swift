@@ -25,7 +25,7 @@ struct TabBarView: View {
 
             SwiftView()
                 .tabItem {
-                    Label("Livia", image: "tab-bar-livia")
+                    Label("Swift", image: "tab-bar-swift")
                 }
 
             Profile()

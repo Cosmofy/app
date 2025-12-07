@@ -1,25 +1,32 @@
 //
-//  SettingsView.swift
+//  Profile.swift
 //  Cosmofy macOS
 //
-//  Settings view for macOS app preferences
+//  Created by Arryan Bhatnagar on 8/2/24.
 //
 
 import SwiftUI
 
-struct SettingsView: View {
+struct Profile: View {
     @Environment(\.colorScheme) private var scheme
     @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
     @Namespace private var animation
     @State private var circleOffset: CGSize = .zero
 
     var body: some View {
-        VStack(spacing: 24) {
-            // Theme selector with moon/sun animation
-            themeSelector
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Theme selector
+                    themeSelector
+
+                    // Profile card
+                    profileCard
+                }
+                .padding()
+            }
+            .navigationTitle("Profile")
         }
-        .padding(32)
-        .frame(width: 400, height: 350)
         .onAppear {
             let isDark = scheme == .dark
             circleOffset = CGSize(width: isDark ? 30 : 150, height: isDark ? -25 : -150)
@@ -33,15 +40,10 @@ struct SettingsView: View {
     }
 
     private var themeSelector: some View {
-        VStack(spacing: 20) {
-            Text("Appearance")
-                .font(.title2)
-                .fontWeight(.semibold)
-                .fontDesign(.rounded)
-
+        VStack(spacing: 15) {
             Circle()
                 .fill(userTheme.color(scheme).gradient)
-                .frame(width: 120, height: 120)
+                .frame(width: 150, height: 150)
                 .mask {
                     Rectangle()
                         .overlay {
@@ -76,8 +78,71 @@ struct SettingsView: View {
             }
             .padding(3)
             .background(.primary.opacity(0.06), in: .capsule)
-            .padding(.top, 12)
+            .padding(.top, 20)
         }
         .frame(maxWidth: .infinity)
+        .padding(.vertical, 24)
+    }
+
+    private var profileCard: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("Stellar Scholar")
+                    .fontDesign(.rounded)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+                HStack {
+                    Text("Active")
+                        .foregroundStyle(.green)
+                        .fontDesign(.rounded)
+                        .fontWeight(.medium)
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                }
+            }
+
+            Text("Intermediate knowledge of space, perfect for curious minds.")
+                .foregroundStyle(.secondary)
+                .fontDesign(.rounded)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+}
+
+#Preview {
+    Profile()
+}
+
+// MARK: - Theme
+
+enum Theme: String, CaseIterable {
+    case systemDefault = "Default"
+    case light = "Light"
+    case dark = "Dark"
+
+    func color(_ scheme: ColorScheme) -> Color {
+        switch self {
+        case .systemDefault:
+            return scheme == .dark ? .moon : .sun
+        case .light:
+            return .sun
+        case .dark:
+            return .moon
+        }
+    }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .systemDefault:
+            return nil
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
     }
 }
