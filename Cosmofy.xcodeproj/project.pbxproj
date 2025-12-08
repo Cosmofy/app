@@ -142,6 +142,18 @@
 		2F4F8FC2295EBC5100F7EE98 /* StarsParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC0295EBC5100F7EE98 /* StarsParticleSystem.scnp */; };
 		2F4F8FC3295EBC5100F7EE98 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC1295EBC5100F7EE98 /* star.png */; };
 		2F4F8FC5295EC08100F7EE98 /* PlanetNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC4295EC08100F7EE98 /* PlanetNode.swift */; };
+		4EE84B06D3FC055881245F46 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A48DCEFAD2E8E0CF3E5E2 /* Typography.swift */; };
+		50355AB815680DD67781CB21 /* macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F4BDC9AA779BCF029FDFAC /* macOS.swift */; };
+		910545704BA69530B4A09D2E /* schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D978030B4FD3483D3C9A4E7 /* schema.swift */; };
+		917BE95DC1D6051002EA74AD /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A48DCEFAD2E8E0CF3E5E2 /* Typography.swift */; };
+		A7BA87399A95CE1ECA582BAC /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A48DCEFAD2E8E0CF3E5E2 /* Typography.swift */; };
+		B0D4CE164E143420B8E76D3B /* schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D978030B4FD3483D3C9A4E7 /* schema.swift */; };
+		BA437F47D01285654314724C /* tvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D939318DAEC395503D2BDB7 /* tvOS.swift */; };
+		D7043532E33D28F3E03BA894 /* schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D978030B4FD3483D3C9A4E7 /* schema.swift */; };
+		DC5B7DE1DF7037D66F625204 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47A48DCEFAD2E8E0CF3E5E2 /* Typography.swift */; };
+		DE7F03BD29E68C6DF4F018DF /* iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39EF807D42AD22646FC68DB /* iOS.swift */; };
+		F9C1C15EA798200FB1E2490A /* watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EE65A2546F0C794C20D8BF /* watchOS.swift */; };
+		FBEDF952480E3F49E3EE02DB /* schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D978030B4FD3483D3C9A4E7 /* schema.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,12 +270,19 @@
 		0BFDE74E2C2EBDAF00E8B3FB /* iPadPlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadPlanetView.swift; sourceTree = "<group>"; };
 		0BFF74662B76FE0B0079A71A /* PlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetView.swift; sourceTree = "<group>"; };
 		0BMACOS072EE2298700C11102 /* GQLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQLViewModel.swift; sourceTree = "<group>"; };
+		1D978030B4FD3483D3C9A4E7 /* schema.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = schema.swift; sourceTree = "<group>"; };
 		2F4F8FC0295EBC5100F7EE98 /* StarsParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = StarsParticleSystem.scnp; sourceTree = "<group>"; };
 		2F4F8FC1295EBC5100F7EE98 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		2F4F8FC4295EC08100F7EE98 /* PlanetNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetNode.swift; sourceTree = "<group>"; };
 		2F6427CF2A4FA4EF00CC503D /* Cosmofy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cosmofy.entitlements; sourceTree = "<group>"; };
 		2FBBB6612945531700BBB072 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FBBB6662945531700BBB072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34F4BDC9AA779BCF029FDFAC /* macOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = macOS.swift; sourceTree = "<group>"; };
+		63EE65A2546F0C794C20D8BF /* watchOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = watchOS.swift; sourceTree = "<group>"; };
+		7F767C8D172A4D9A08046AC7 /* visionOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = visionOS.swift; sourceTree = "<group>"; };
+		9D939318DAEC395503D2BDB7 /* tvOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = tvOS.swift; sourceTree = "<group>"; };
+		C39EF807D42AD22646FC68DB /* iOS.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = iOS.swift; sourceTree = "<group>"; };
+		D47A48DCEFAD2E8E0CF3E5E2 /* Typography.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +341,7 @@
 				0B9F026E2B75E56000CB5543 /* Fonts */,
 				0BB14A4B2B9C2E9300476F3C /* Extensions */,
 				0BF2A4152BFBEEFC007B3E4B /* Helpers */,
+				200039AFA06B381FFDD63F84 /* Theme */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -416,6 +436,7 @@
 				0BMACOS072EE2298700C11102 /* GQLViewModel.swift */,
 				0B8FC0E22EE2298600C11102 /* Models.swift */,
 				0B8FC0E32EE2298600C11102 /* Queries.swift */,
+				5B32D77F71E60CCC9908E3D7 /* Schema */,
 			);
 			path = Livia;
 			sourceTree = "<group>";
@@ -583,6 +604,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		200039AFA06B381FFDD63F84 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				D47A48DCEFAD2E8E0CF3E5E2 /* Typography.swift */,
+			);
+			name = Theme;
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		2FBBB64C2945531500BBB072 = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +642,20 @@
 				0BB14A482B9C2B6C00476F3C /* Views */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		5B32D77F71E60CCC9908E3D7 /* Schema */ = {
+			isa = PBXGroup;
+			children = (
+				C39EF807D42AD22646FC68DB /* iOS.swift */,
+				34F4BDC9AA779BCF029FDFAC /* macOS.swift */,
+				9D939318DAEC395503D2BDB7 /* tvOS.swift */,
+				63EE65A2546F0C794C20D8BF /* watchOS.swift */,
+				7F767C8D172A4D9A08046AC7 /* visionOS.swift */,
+				1D978030B4FD3483D3C9A4E7 /* schema.swift */,
+			);
+			name = Schema;
+			path = Schema;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -838,6 +882,9 @@
 				0B8615A92EE2300000C11102 /* LoadingView.swift in Sources */,
 				0B8615AA2EE2301000C11102 /* Planet.swift in Sources */,
 				0BMACOS072EE2302000C11102 /* PlanetNode.swift in Sources */,
+				4EE84B06D3FC055881245F46 /* Typography.swift in Sources */,
+				50355AB815680DD67781CB21 /* macOS.swift in Sources */,
+				910545704BA69530B4A09D2E /* schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,6 +917,9 @@
 				0B9953ED2CE596B300124D68 /* Home.swift in Sources */,
 				0B9953D62CE5966700124D68 /* MapHelpers.swift in Sources */,
 				0B9953DB2CE5966700124D68 /* LoadingView.swift in Sources */,
+				A7BA87399A95CE1ECA582BAC /* Typography.swift in Sources */,
+				BA437F47D01285654314724C /* tvOS.swift in Sources */,
+				B0D4CE164E143420B8E76D3B /* schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,6 +943,9 @@
 				0B63FC162CAC3E8900DEEE0F /* SwiftView.swift in Sources */,
 				0B6E54212CAB45A50094B3FF /* Swift.swift in Sources */,
 				0B6E54222CAB45A50094B3FF /* MessageRow.swift in Sources */,
+				DC5B7DE1DF7037D66F625204 /* Typography.swift in Sources */,
+				F9C1C15EA798200FB1E2490A /* watchOS.swift in Sources */,
+				FBEDF952480E3F49E3EE02DB /* schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +987,9 @@
 				2F4F8FC5295EC08100F7EE98 /* PlanetNode.swift in Sources */,
 				0B8615A82BAF6580008CCD5F /* LoadingView.swift in Sources */,
 				0BGQLVM_IOS2EE3000000003 /* GQLViewModel.swift in Sources */,
+				917BE95DC1D6051002EA74AD /* Typography.swift in Sources */,
+				DE7F03BD29E68C6DF4F018DF /* iOS.swift in Sources */,
+				D7043532E33D28F3E03BA894 /* schema.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
