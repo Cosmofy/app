@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Profile.swift
 //  Cosmofy iOS
@@ -249,3 +250,4 @@ enum Theme: String, CaseIterable {
         }
     }
 }
+#endif

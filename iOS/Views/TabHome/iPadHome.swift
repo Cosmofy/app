@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  iPadHome.swift
 //  Cosmofy
@@ -242,3 +243,4 @@ struct VisualEffectView: UIViewRepresentable {
         uiView.effect = effect
     }
 }
+#endif

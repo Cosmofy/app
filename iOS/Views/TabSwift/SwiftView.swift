@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //  ========================================
 //  ContentView.swift
 //  Cosmofy
@@ -169,3 +170,4 @@ struct SwiftView: View {
     SwiftView()
         .environmentObject(InteractingViewModel(api: API()))
 }
+#endif

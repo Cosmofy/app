@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //  ========================================
 //  MessageRowView.swift
 //  Cosmofy
@@ -7,7 +8,7 @@
 //  ========================================
 
 import SwiftUI
-import MarkdownUI
+// import MarkdownUI // Removed for iOS 9 compatibility
 
 var complete: Bool = false
 
@@ -82,12 +83,10 @@ struct MessageRowView: View {
                     
 //                        .font(Font.custom("SF Pro Rounded Medium", size: 18))
                 } else {
-                    Markdown(text)
+                    // Markdown replaced with Text for iOS 9 compatibility
+                    Text(text)
                         .multilineTextAlignment(.leading)
                         .textSelection(.enabled)
-//                    Text(text)
-//                        .multilineTextAlignment(.leading)
-////                        .textSelection(.enabled)
                 }
                 #else
                 if image == "openai" {
@@ -101,9 +100,11 @@ struct MessageRowView: View {
                         Text(text)
                             .multilineTextAlignment(.leading)
                     }
-                    
+
                 } else {
-                    Markdown(text)
+                    // Markdown replaced with Text for iOS 9 compatibility
+                    Text(text)
+                        .multilineTextAlignment(.leading)
                 }
                 #endif
                 
@@ -130,7 +131,8 @@ struct MessageRowView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(.ultraThinMaterial)
 
-    
+
     }
 }
+#endif
 

@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  OnboardingView.swift
 //  Cosmofy iOS
@@ -12,16 +13,16 @@ struct OnboardingView: View {
     @State var onboardingState: Int = 0
     @State var selectedProfile: Int = 2 // 1 kids. 2 adults.
     @State var firstName: String = ""
-    
+
     let transition: AnyTransition = .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading))
-    
+
     @AppStorage("selectedProfile") var currentSelectedProfile: Int?
     @AppStorage("firstName") var currentFirstName: String?
     @AppStorage("signed_in") var currentUserSignedIn: Bool = false
-    
+
     @State var showAlert: Bool = false
 
-    
+
     var body: some View {
         VStack {
             switch onboardingState {
@@ -44,14 +45,14 @@ struct OnboardingView: View {
                     Spacer()
                 }
             }
-            
+
             Spacer()
             bottomButton
-                
+
         }
         .padding()
     }
-    
+
     private var bottomButton: some View {
         Text(
             onboardingState == 0 ? "Continue" :
@@ -68,7 +69,7 @@ struct OnboardingView: View {
                 handleNextButtonPress()
             }
     }
-    
+
     private var welcomeScreen: some View {
         VStack {
             Spacer()
@@ -94,7 +95,7 @@ struct OnboardingView: View {
             Spacer()
         }
     }
-    
+
     private var aboutScreen: some View {
         VStack {
             Spacer()
@@ -106,7 +107,7 @@ struct OnboardingView: View {
                 Spacer()
             }
             .padding()
-            
+
             HStack() {
                 Text("Cosmofy is a multi-platfrom application about astronomy and space.")
                     .fontDesign(.rounded)
@@ -117,12 +118,12 @@ struct OnboardingView: View {
             }
             .padding(.horizontal)
             Spacer()
-            
+
         }
     }
-    
+
     private var roleSelectionScreen: some View {
-        
+
         VStack {
             Spacer()
             HStack() {
@@ -132,54 +133,7 @@ struct OnboardingView: View {
                     .fontWeight(.bold)
                 Spacer()
             }
-//            
-//            VStack {
-//                HStack() {
-//                    Text("Cosmic Expert")
-//                        .fontDesign(.rounded)
-//                        .font(.title2)
-//                        .fontWeight(.semibold)
-//                    Spacer()
-//                    if selectedProfile == 3 {
-//                        HStack {
-//                            Text("Selected")
-//                                .foregroundStyle(.green)
-//                                .fontDesign(.rounded)
-//                                .font(.subheadline)
-//                                .fontWeight(.medium)
-//                            
-//                            Image(systemName: "checkmark.circle.fill")
-//                                .foregroundStyle(.green)
-//                        }
-//                    }
-//                    
-//                }
-//                .padding()
-//                HStack() {
-//                    Text("Advanced understanding of space for enthusiasts and professionals.")
-//                        .foregroundStyle(.secondary)
-//                        .fontDesign(.rounded)
-//                    Spacer()
-//                }
-//                .padding(.horizontal)
-//                Spacer()
-//            }
-//            .frame(maxWidth: .infinity)
-//            .frame(height: 130)
-//            .background(.ultraThinMaterial)
-//            .clipShape(RoundedRectangle(cornerRadius: 24))
-//            .overlay {
-//                if selectedProfile == 3 {
-//                    RoundedRectangle(cornerRadius: 24)
-//                        .stroke(.green.gradient, lineWidth: 2)
-//                }
-//            }
-//            .padding(.bottom)
-//            .onTapGesture {
-//                selectedProfile = 3
-//            }
-            
-           
+
             VStack {
                 HStack() {
                     Text("Stellar Scholar")
@@ -194,7 +148,7 @@ struct OnboardingView: View {
                                 .fontDesign(.rounded)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
-                            
+
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(.green)
                         }
@@ -225,7 +179,7 @@ struct OnboardingView: View {
                 selectedProfile = 2
             }
 
-            
+
             VStack {
                 HStack() {
                     Text("kids")
@@ -254,7 +208,7 @@ struct OnboardingView: View {
                                 .fontDesign(.rounded)
                                 .font(.subheadline)
                                 .fontWeight(.medium)
-                            
+
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(.green)
                         }
@@ -283,7 +237,7 @@ struct OnboardingView: View {
             .onTapGesture {
                 selectedProfile = 1
             }
-            
+
             Text("You can change this later.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -293,7 +247,7 @@ struct OnboardingView: View {
         }
         .padding(.horizontal)
     }
-    
+
     private var nameScreen: some View {
         VStack {
             Spacer()
@@ -302,7 +256,7 @@ struct OnboardingView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding()
-            
+
             TextField("First Name", text: $firstName)
                 .fontDesign(.rounded)
                 .frame(height: 50)
@@ -310,7 +264,7 @@ struct OnboardingView: View {
                 .background(Color.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .padding(.horizontal)
-            
+
             if showAlert {
                 Text("Your name should at least be 2 characters.")
                     .foregroundStyle(.red)
@@ -325,12 +279,12 @@ struct OnboardingView: View {
                     .padding(.top, 8)
             }
             Spacer()
-            
+
         }
     }
-    
+
     func handleNextButtonPress() {
-        
+
         switch onboardingState {
             case 3:
                 guard firstName.count >= 2 else {
@@ -339,7 +293,7 @@ struct OnboardingView: View {
                 }
             default: break
         }
-        
+
         if onboardingState == 3 {
             signIn()
         } else {
@@ -347,9 +301,9 @@ struct OnboardingView: View {
                 onboardingState += 1
             }
         }
-        
+
     }
-    
+
     func signIn() {
         print("Signing In")
         currentSelectedProfile = selectedProfile
@@ -363,3 +317,4 @@ struct OnboardingView: View {
 #Preview {
     OnboardingView()
 }
+#endif

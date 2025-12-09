@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  TabBarView.swift
 //  Cosmofy
@@ -50,7 +51,7 @@ struct TabBarKids: View {
                     Text("Learn")
                 }
                 .tag(0)
-            
+
             Profile()
                 .tabItem {
                     Image(systemName: "person.fill")
@@ -59,8 +60,7 @@ struct TabBarKids: View {
                 .tag(1)
         }
         .tint(.primary)
- 
+
     }
 }
-
-
+#endif

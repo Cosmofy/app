@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  IntroView.swift
 //  Cosmofy iOS
@@ -38,3 +39,4 @@ struct IntroView: View {
         .animation(.easeInOut(duration: 0.5), value: currentSelectedProfile)
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  PlanetsView.swift
 //  Cosmofy
@@ -187,4 +188,5 @@ struct PlanetBlock: View {
         }
     }
 }
+#endif
 

@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  PlanetView.swift
 //  Cosmofy
@@ -612,3 +613,4 @@ struct FullScreenPlanetView: View {
         }
     }
 }
+#endif

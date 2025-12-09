@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Home.swift
 //  Cosmofy
@@ -9,7 +10,7 @@ import SwiftUI
 import MapKit
 import WeatherKit
 import CoreLocation
-import VTabView
+// import VTabView // Removed for iOS 9 compatibility
 
 class WeatherViewModel: ObservableObject {
     @Published var weather: Weather?
@@ -703,7 +704,8 @@ struct NatureScopeMap: View {
     private var eventOverlay: some View {
         VStack {
             Spacer()
-            VTabView(indexPosition: .trailing) {
+            // VTabView replaced with TabView for iOS 9 compatibility
+            TabView {
                 eventTitleView
                 eventMapView
                 eventDateView
@@ -927,3 +929,4 @@ struct NatureScopeMap: View {
         }
     }
 }
+#endif

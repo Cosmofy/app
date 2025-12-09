@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  iPadPlanetView.swift
 //  Cosmofy
@@ -257,4 +258,5 @@ struct iPadAtmosphereView: View {
         .cornerRadius(8)
     }
 }
+#endif
 

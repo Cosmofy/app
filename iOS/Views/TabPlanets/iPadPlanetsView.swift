@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  iPadPlanetsView.swift
 //  Cosmofy
@@ -96,3 +97,4 @@ struct iPadPlanetSmall: View {
 #Preview {
     iPadPlanetsView()
 }
+#endif

@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  KidsPlanetView.swift
 //  Cosmofy iOS
@@ -240,3 +241,4 @@ struct KidsAtmosphereView: View {
 #Preview {
     KidsPlanetView(planet: neptunePlanet)
 }
+#endif

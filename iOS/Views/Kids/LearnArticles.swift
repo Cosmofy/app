@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Activities.swift
 //  Cosmofy iOS
@@ -39,3 +40,4 @@ struct TheMoonLandingArticle: View {
             )
     }
 }
+#endif

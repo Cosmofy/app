@@ -15,6 +15,7 @@
 		0B1BAD572AE97736001CFC35 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0B1BAD562AE97736001CFC35 /* .gitignore */; };
 		0B1C6E0F2C5CDF16002F6CDC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1C6E0E2C5CDF16002F6CDC /* Profile.swift */; };
 		0B365C3E2CAC990500B07EFE /* MessageRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B365C3D2CAC990400B07EFE /* MessageRowView.swift */; };
+		0B3BFD752EE7C98B0082B32C /* File.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B3BFD742EE7C98B0082B32C /* File.txt */; };
 		0B3EC2642BA4BAFE004491B7 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3EC2632BA4BAFE004491B7 /* ImageView.swift */; };
 		0B5C33E02CA870F000B8BDD5 /* Text+ForegroundLinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C33DF2CA870E300B8BDD5 /* Text+ForegroundLinearGradient.swift */; };
 		0B63FC142CAB80FE00DEEE0F /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0B63FC132CAB80FE00DEEE0F /* MarkdownUI */; };
@@ -103,7 +104,6 @@
 		0B9F027E2B75E5B200CB5543 /* SF-Pro-Rounded-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B9F02752B75E5B200CB5543 /* SF-Pro-Rounded-Thin.otf */; };
 		0B9F027F2B75E5B200CB5543 /* SF-Pro-Rounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B9F02762B75E5B200CB5543 /* SF-Pro-Rounded-Medium.otf */; };
 		0B9F02802B75E5B200CB5543 /* SF-Pro-Rounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0B9F02772B75E5B200CB5543 /* SF-Pro-Rounded-Regular.otf */; };
-		0BAB49562EE247220007129B /* SwiftfulLoadingIndicators in Frameworks */ = {isa = PBXBuildFile; productRef = 0BSWIFTLOAD22EE3000000002 /* SwiftfulLoadingIndicators */; };
 		0BAB495A2EE2ADE90007129B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBBB6612945531700BBB072 /* Assets.xcassets */; };
 		0BAB495C2EE2AE240007129B /* Logo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB495B2EE2AE240007129B /* Logo.icon */; };
 		0BAB495D2EE2AE240007129B /* Logo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB495B2EE2AE240007129B /* Logo.icon */; };
@@ -115,11 +115,9 @@
 		0BB14A4D2B9C2EB000476F3C /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB14A4C2B9C2EB000476F3C /* Color+Hex.swift */; };
 		0BBAC7432C4E779A00DE4C85 /* MapHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBAC7422C4E779A00DE4C85 /* MapHelpers.swift */; };
 		0BD13DE42C83E54100121BEC /* KidsPlanetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD13DE32C83E54100121BEC /* KidsPlanetView.swift */; };
-		0BD73D382CAF7C0E00B87156 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD73D372CAF7C0E00B87156 /* MarkdownUI */; };
 		0BDBC9CE2C1D956E00F720F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDBC9CD2C1D956E00F720F2 /* ContentView.swift */; };
 		0BDBC9DD2C1D95CB00F720F2 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B161A6C2BA02123008F3D0F /* Planet.swift */; };
 		0BDBC9E12C1DA48000F720F2 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB14A4C2B9C2EB000476F3C /* Color+Hex.swift */; };
-		0BEFAB9D2C6FAD18007B71B3 /* VTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 0BEFAB9C2C6FAD18007B71B3 /* VTabView */; };
 		0BF2A4172BFBF24B007B3E4B /* GarenText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF2A4162BFBF24B007B3E4B /* GarenText.swift */; };
 		0BF311B42C5D91A000EAA4AA /* Learn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF311B32C5D91A000EAA4AA /* Learn.swift */; };
 		0BF311B62C5D91B600EAA4AA /* LearnArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF311B52C5D91B600EAA4AA /* LearnArticles.swift */; };
@@ -132,6 +130,9 @@
 		0BGQLVM_IOS2EE3000000003 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
 		0BGQLVM_TVOS2EE3000000004 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
 		0BGQLVM_WATCHOS2EE3000005 /* GQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BMACOS072EE2298700C11102 /* GQLViewModel.swift */; };
+		0BIOS9APP2EE4000000000005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE4000000000001 /* AppDelegate.swift */; };
+		0BIOS9APP2EE4000000000007 /* LegacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE4000000000003 /* LegacyViewController.swift */; };
+		0BIOS9APP2EE4000000000008 /* Legacy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE4000000000004 /* Legacy.storyboard */; };
 		0BMACICON2EE2AE240007129B /* Logo.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0BAB495B2EE2AE240007129B /* Logo.icon */; };
 		0BMACOS012EE2298700C11102 /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7D18BE2AE8A482009C2317 /* MessageRow.swift */; };
 		0BMACOS022EE2298700C11102 /* Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7671962AE4C3FE008E57B2 /* Swift.swift */; };
@@ -142,6 +143,12 @@
 		2F4F8FC2295EBC5100F7EE98 /* StarsParticleSystem.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC0295EBC5100F7EE98 /* StarsParticleSystem.scnp */; };
 		2F4F8FC3295EBC5100F7EE98 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC1295EBC5100F7EE98 /* star.png */; };
 		2F4F8FC5295EC08100F7EE98 /* PlanetNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4F8FC4295EC08100F7EE98 /* PlanetNode.swift */; };
+		0BIOS9APP2EE400000000000A /* LegacyNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE400000000000B /* LegacyNetworking.swift */; };
+		0BIOS9APP2EE400000000000C /* LegacyHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE400000000000D /* LegacyHomeViewController.swift */; };
+		0BIOS9APP2EE400000000000E /* LegacyPictureOfTheDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE400000000000F /* LegacyPictureOfTheDayViewController.swift */; };
+		0BIOS9APP2EE4000000000010 /* LegacyArticleOfTheMonthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE4000000000011 /* LegacyArticleOfTheMonthViewController.swift */; };
+		0BIOS9APP2EE4000000000012 /* LegacyNatureScopeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE4000000000013 /* LegacyNatureScopeViewController.swift */; };
+		0BIOS9APP2EE4000000000014 /* LegacyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BIOS9APP2EE4000000000015 /* LegacyTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +203,7 @@
 		0B1C6E0E2C5CDF16002F6CDC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0B2420AF2C511C69005A5958 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B365C3D2CAC990400B07EFE /* MessageRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRowView.swift; sourceTree = "<group>"; };
+		0B3BFD742EE7C98B0082B32C /* File.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.txt; sourceTree = "<group>"; };
 		0B3EC2632BA4BAFE004491B7 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		0B5C33DD2CA7C43400B8BDD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B5C33DF2CA870E300B8BDD5 /* Text+ForegroundLinearGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+ForegroundLinearGradient.swift"; sourceTree = "<group>"; };
@@ -257,6 +265,15 @@
 		0BFDE74C2C2E062D00E8B3FB /* iPadPlanetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadPlanetsView.swift; sourceTree = "<group>"; };
 		0BFDE74E2C2EBDAF00E8B3FB /* iPadPlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadPlanetView.swift; sourceTree = "<group>"; };
 		0BFF74662B76FE0B0079A71A /* PlanetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetView.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE4000000000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE4000000000003 /* LegacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyViewController.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE4000000000004 /* Legacy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Legacy.storyboard; sourceTree = "<group>"; };
+		0BIOS9APP2EE400000000000B /* LegacyNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyNetworking.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE400000000000D /* LegacyHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyHomeViewController.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE400000000000F /* LegacyPictureOfTheDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyPictureOfTheDayViewController.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE4000000000011 /* LegacyArticleOfTheMonthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyArticleOfTheMonthViewController.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE4000000000013 /* LegacyNatureScopeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyNatureScopeViewController.swift; sourceTree = "<group>"; };
+		0BIOS9APP2EE4000000000015 /* LegacyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyTabBarController.swift; sourceTree = "<group>"; };
 		0BMACOS072EE2298700C11102 /* GQLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQLViewModel.swift; sourceTree = "<group>"; };
 		2F4F8FC0295EBC5100F7EE98 /* StarsParticleSystem.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = StarsParticleSystem.scnp; sourceTree = "<group>"; };
 		2F4F8FC1295EBC5100F7EE98 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
@@ -296,9 +313,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BAB49562EE247220007129B /* SwiftfulLoadingIndicators in Frameworks */,
-				0BEFAB9D2C6FAD18007B71B3 /* VTabView in Frameworks */,
-				0BD73D382CAF7C0E00B87156 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +597,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0BIOS9APP2EE4000000000009 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				0BIOS9APP2EE4000000000003 /* LegacyViewController.swift */,
+				0BIOS9APP2EE400000000000D /* LegacyHomeViewController.swift */,
+				0BIOS9APP2EE400000000000F /* LegacyPictureOfTheDayViewController.swift */,
+				0BIOS9APP2EE4000000000011 /* LegacyArticleOfTheMonthViewController.swift */,
+				0BIOS9APP2EE4000000000013 /* LegacyNatureScopeViewController.swift */,
+				0BIOS9APP2EE4000000000015 /* LegacyTabBarController.swift */,
+				0BIOS9APP2EE400000000000B /* LegacyNetworking.swift */,
+				0BIOS9APP2EE4000000000004 /* Legacy.storyboard */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
 		2FBBB64C2945531500BBB072 = {
 			isa = PBXGroup;
 			children = (
@@ -608,7 +637,10 @@
 				2F6427CF2A4FA4EF00CC503D /* Cosmofy.entitlements */,
 				2FBBB6662945531700BBB072 /* Info.plist */,
 				0B9755B92C2EF9E7002D9C70 /* Launch Screen.storyboard */,
+				0B3BFD742EE7C98B0082B32C /* File.txt */,
+				0BIOS9APP2EE4000000000001 /* AppDelegate.swift */,
 				0BB14A422B9C2B1100476F3C /* CosmofyApp.swift */,
+				0BIOS9APP2EE4000000000009 /* Legacy */,
 				0BB14A482B9C2B6C00476F3C /* Views */,
 			);
 			path = iOS;
@@ -693,9 +725,6 @@
 			);
 			name = Cosmofy;
 			packageProductDependencies = (
-				0BEFAB9C2C6FAD18007B71B3 /* VTabView */,
-				0BD73D372CAF7C0E00B87156 /* MarkdownUI */,
-				0BSWIFTLOAD22EE3000000002 /* SwiftfulLoadingIndicators */,
 			);
 			productName = Spacefy;
 			productReference = 0BAB49642EE2AFDA0007129B /* Cosmofy.app */;
@@ -807,8 +836,10 @@
 				2F4F8FC2295EBC5100F7EE98 /* StarsParticleSystem.scnp in Resources */,
 				0B9F02792B75E5B200CB5543 /* SF-Pro-Rounded-Bold.otf in Resources */,
 				0B9F02782B75E5B200CB5543 /* SF-Pro-Rounded-Heavy.otf in Resources */,
+				0B3BFD752EE7C98B0082B32C /* File.txt in Resources */,
 				0BAB49612EE2AFCB0007129B /* Assets.xcassets in Resources */,
 				0B9F027A2B75E5B200CB5543 /* SF-Pro-Rounded-Semibold.otf in Resources */,
+				0BIOS9APP2EE4000000000008 /* Legacy.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,6 +965,14 @@
 				2F4F8FC5295EC08100F7EE98 /* PlanetNode.swift in Sources */,
 				0B8615A82BAF6580008CCD5F /* LoadingView.swift in Sources */,
 				0BGQLVM_IOS2EE3000000003 /* GQLViewModel.swift in Sources */,
+				0BIOS9APP2EE4000000000005 /* AppDelegate.swift in Sources */,
+				0BIOS9APP2EE4000000000007 /* LegacyViewController.swift in Sources */,
+				0BIOS9APP2EE400000000000C /* LegacyHomeViewController.swift in Sources */,
+				0BIOS9APP2EE400000000000E /* LegacyPictureOfTheDayViewController.swift in Sources */,
+				0BIOS9APP2EE4000000000010 /* LegacyArticleOfTheMonthViewController.swift in Sources */,
+				0BIOS9APP2EE4000000000012 /* LegacyNatureScopeViewController.swift in Sources */,
+				0BIOS9APP2EE4000000000014 /* LegacyTabBarController.swift in Sources */,
+				0BIOS9APP2EE400000000000A /* LegacyNetworking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1530,25 +1569,10 @@
 			package = 0B99537A2CE5439200124D68 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
 		};
-		0BD73D372CAF7C0E00B87156 /* MarkdownUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0B5C33D72CA7C1E500B8BDD5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
-			productName = MarkdownUI;
-		};
-		0BEFAB9C2C6FAD18007B71B3 /* VTabView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0BEFAB9A2C6FACEB007B71B3 /* XCRemoteSwiftPackageReference "swiftui-vertical-tab-view" */;
-			productName = VTabView;
-		};
 		0BFFDA682EE37CC400A4EC46 /* VTabView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0BEFAB9A2C6FACEB007B71B3 /* XCRemoteSwiftPackageReference "swiftui-vertical-tab-view" */;
 			productName = VTabView;
-		};
-		0BSWIFTLOAD22EE3000000002 /* SwiftfulLoadingIndicators */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0BSWIFTLOAD12EE3000000001 /* XCRemoteSwiftPackageReference "SwiftfulLoadingIndicators" */;
-			productName = SwiftfulLoadingIndicators;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

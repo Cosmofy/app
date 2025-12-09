@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Learn.swift
 //  Cosmofy iOS
@@ -286,3 +287,4 @@ struct IOTDViewKids: View {
         }
     }
 }
+#endif

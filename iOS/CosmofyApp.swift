@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  CosmofyApp.swift
 //  Cosmofy
@@ -7,9 +8,8 @@
 
 import Foundation
 import SwiftUI
-import SwiftfulLoadingIndicators
+// import SwiftfulLoadingIndicators // Removed for iOS 9 compatibility
 
-@main
 struct CosmofyApp: App {
     @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
 
@@ -71,7 +71,8 @@ struct NetworkErrorView: View {
                 .fontDesign(.rounded)
                 .fontWeight(.medium)
 
-            LoadingIndicator(animation: .threeBallsTriangle, color: .BETRAYED, size: .medium)
+            // LoadingIndicator(animation: .threeBallsTriangle, color: .BETRAYED, size: .medium) // Removed for iOS 9 compatibility
+            ProgressView()
                 .frame(height: 50)
 
             Button(action: onRetry) {
@@ -136,7 +137,7 @@ struct SplashScreenView: View {
                 endPoint: .bottomTrailing
             )
             .edgesIgnoringSafeArea(.all)
-            
+
             Image("app-icon-4k")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -145,3 +146,4 @@ struct SplashScreenView: View {
         }
     }
 }
+#endif
