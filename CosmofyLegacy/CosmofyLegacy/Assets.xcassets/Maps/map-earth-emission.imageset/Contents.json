@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "8081_earthlights2k.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "localizable" : true
+  }
+}
