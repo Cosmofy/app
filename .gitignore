@@ -4,3 +4,11 @@
 *.xcuserdata/
 *.xcodeproj/xcuserdata/
 *.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Build artifacts
+build/
+
+# Claude Code session files
+raptor
+rpator
+*.txt

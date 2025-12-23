@@ -10,6 +10,7 @@
 import SwiftUI
 import TipKit
 
+@available(iOS 17.0, *)
 struct SwiftView: View {
 
     @Environment(\.colorScheme) var colorScheme
@@ -166,6 +167,7 @@ struct SwiftView: View {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
     SwiftView()
         .environmentObject(InteractingViewModel(api: API()))

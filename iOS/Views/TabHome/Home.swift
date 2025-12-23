@@ -12,6 +12,7 @@ import WeatherKit
 import CoreLocation
 // import VTabView // Removed for iOS 9 compatibility
 
+@available(iOS 17.0, *)
 class WeatherViewModel: ObservableObject {
     @Published var weather: Weather?
     private let weatherService = WeatherService.shared
@@ -31,6 +32,7 @@ class WeatherViewModel: ObservableObject {
     }
 }
 
+@available(iOS 17.0, *)
 struct Home: View {
 
     @ObservedObject var viewModel: GQLViewModel
@@ -105,6 +107,7 @@ struct Home: View {
     }
 }
 
+@available(iOS 13.0, *)
 extension UIFont {
     var rounded: UIFont {
         guard let descriptor = fontDescriptor.withDesign(.rounded) else { return self }
@@ -112,6 +115,7 @@ extension UIFont {
     }
 }
 
+@available(iOS 17.0, *)
 struct ArticleView: View {
     let articles: [GQLArticle]
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -151,6 +155,7 @@ struct ArticleView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct ArticleCard: View {
     let article: GQLArticle
     var isCompact: Bool = false
@@ -221,6 +226,7 @@ struct ArticleCard: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct ArticleDetailView: View {
     let article: GQLArticle
 
@@ -239,6 +245,7 @@ struct ArticleDetailView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct NavView<Destination: View>: View {
     
     var view: Destination
@@ -306,6 +313,7 @@ struct NavView<Destination: View>: View {
 }
 
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Text {
     public func foregroundLinearGradient(
         colors: [Color],
@@ -325,6 +333,7 @@ extension Text {
 
 // MARK: - Picture of the Day
 
+@available(iOS 17.0, *)
 struct IOTDView: View {
     @ObservedObject var viewModel: GQLViewModel
     @State private var selectedDate: Date = IOTDView.currentMountainTimeDate()
@@ -333,6 +342,7 @@ struct IOTDView: View {
     @State private var downloadButtonColor: Color = .indigo
     @State private var downloadButtonText: String = "Download"
     @State private var downloadButtonIcon: String = "arrow.down.to.line"
+    @State private var showFullscreenImage: Bool = false
 
     static func currentMountainTimeDate() -> Date {
         let mountainTimeZone = TimeZone(identifier: "America/Denver")!
@@ -413,7 +423,7 @@ struct IOTDView: View {
 
                     if picture.media_type == "video" {
                         if let url = picture.media {
-                            WebView(urlString: url)
+                            WebView(urlString: url, isScrollEnabled: false)
                                 .frame(height: 300)
                                 .padding(.horizontal)
                         }
@@ -424,6 +434,9 @@ struct IOTDView: View {
                                     .resizable()
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                                     .aspectRatio(contentMode: .fill)
+                                    .onTapGesture {
+                                        showFullscreenImage = true
+                                    }
 
                                 HStack {
                                     Button {
@@ -566,11 +579,114 @@ struct IOTDView: View {
                 .tint(.SOUR)
             }
         }
+        .fullScreenCover(isPresented: $showFullscreenImage) {
+            if let image = viewModel.preloadedAPODImage {
+                ZoomableImageView(image: image)
+            }
+        }
+        .onAppear {
+            // Fetch today's picture if we don't have data
+            if viewModel.picture == nil && !isLoading {
+                Task {
+                    await viewModel.fetchPicture(for: nil)
+                }
+            }
+        }
+        .onDisappear {
+            // Reset to today's date when leaving the view
+            selectedDate = IOTDView.currentMountainTimeDate()
+            viewModel.picture = nil
+            viewModel.preloadedAPODImage = nil
+        }
+    }
+}
+
+@available(iOS 17.0, *)
+struct ZoomableImageView: View {
+    let image: UIImage
+    @Environment(\.dismiss) private var dismiss
+    @State private var scale: CGFloat = 1.0
+    @State private var lastScale: CGFloat = 1.0
+    @State private var offset: CGSize = .zero
+    @State private var lastOffset: CGSize = .zero
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                Color.black.ignoresSafeArea()
+
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .scaleEffect(scale)
+                    .offset(offset)
+                    .gesture(
+                        MagnifyGesture()
+                            .onChanged { value in
+                                let delta = value.magnification / lastScale
+                                lastScale = value.magnification
+                                scale = min(max(scale * delta, 1), 5)
+                            }
+                            .onEnded { _ in
+                                lastScale = 1.0
+                                if scale <= 1 {
+                                    withAnimation {
+                                        offset = .zero
+                                    }
+                                }
+                            }
+                    )
+                    .simultaneousGesture(
+                        DragGesture()
+                            .onChanged { value in
+                                if scale > 1 {
+                                    offset = CGSize(
+                                        width: lastOffset.width + value.translation.width,
+                                        height: lastOffset.height + value.translation.height
+                                    )
+                                }
+                            }
+                            .onEnded { _ in
+                                lastOffset = offset
+                            }
+                    )
+                    .onTapGesture(count: 2) {
+                        withAnimation {
+                            if scale > 1 {
+                                scale = 1
+                                offset = .zero
+                                lastOffset = .zero
+                            } else {
+                                scale = 2.5
+                            }
+                        }
+                    }
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            Button {
+                withAnimation(.easeOut(duration: 0.4)) {
+                    scale = 1.0
+                    offset = .zero
+                    lastOffset = .zero
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    dismiss()
+                }
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title)
+                    .foregroundStyle(.white.opacity(0.8))
+                    .padding()
+            }
+        }
+        .statusBarHidden()
     }
 }
 
 // MARK: - Nature Scope
 
+@available(iOS 17.0, *)
 struct NatureScope: View {
     @ObservedObject var viewModel: GQLViewModel
 
@@ -658,6 +774,7 @@ struct NatureScope: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct NatureScopeMap: View {
     @ObservedObject var viewModel: GQLViewModel
     @State var selectedEvent: GQLEvent?
@@ -710,7 +827,7 @@ struct NatureScopeMap: View {
                 eventMapView
                 eventDateView
             }
-            .tabViewStyle(PageTabViewStyle())
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .padding()
             .frame(height: 200)
             .frame(maxWidth: 500)

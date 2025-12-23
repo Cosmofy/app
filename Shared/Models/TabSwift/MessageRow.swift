@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //  ========================================
 //  MessageRow.swift
 //  Cosmofy
@@ -21,5 +22,6 @@ struct MessageRow: Identifiable {
     let responseImage: String
     var responseText: String?
     var responseError: String?
-    
+
 }
+#endif

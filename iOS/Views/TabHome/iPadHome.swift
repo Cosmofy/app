@@ -9,6 +9,7 @@
 import SwiftUI
 import UIKit
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 struct iPadHome: View {
     @ObservedObject var viewModel: GQLViewModel
 
@@ -159,6 +160,7 @@ struct iPadHome: View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 struct iPadArticleCard: View {
     let article: GQLArticle
 
@@ -232,6 +234,7 @@ struct iPadArticleCard: View {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 struct VisualEffectView: UIViewRepresentable {
     var effect: UIVisualEffect?
 

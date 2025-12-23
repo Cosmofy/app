@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  View+OffsetX.swift
 //  Cosmofy
@@ -8,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct OffsetKey: PreferenceKey {
     static var defaultValue: CGFloat = .zero
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
@@ -15,9 +17,9 @@ struct OffsetKey: PreferenceKey {
     }
 }
 
-
+@available(iOS 17.0, *)
 extension View {
-    
+
     @ViewBuilder
     func offsetX(completion: @escaping (CGFloat) -> ()) -> some View {
         self.overlay {
@@ -29,5 +31,6 @@ extension View {
             }
         }
     }
-    
+
 }
+#endif

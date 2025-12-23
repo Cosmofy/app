@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  MapHelpers.swift
 //  Cosmofy
@@ -57,6 +58,7 @@ func markerImage(for title: String) -> String {
     }
 }
 
+@available(iOS 17.0, *)
 func markerTint(for title: String) -> Color {
     switch title.lowercased() {
     case "drought":
@@ -172,3 +174,4 @@ let sources: [Source] = [
     Source(id: "HDDS", title: "USGS Hazards Data Distribution System", source: "https://hddsexplorer.usgs.gov/"),
     Source(id: "DFES_WA", title: "Western Australia Department of Fire and Emergency Services", source: "https://www.dfes.wa.gov.au/")
 ]
+#endif

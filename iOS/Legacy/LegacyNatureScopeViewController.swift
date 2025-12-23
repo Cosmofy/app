@@ -61,7 +61,11 @@ class LegacyNatureScopeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "FROM THE NASA EARTH OBSERVATORY"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -116,7 +120,11 @@ class LegacyNatureScopeViewController: UIViewController {
         } else {
             label.font = baseFont
         }
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -139,7 +147,11 @@ class LegacyNatureScopeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "CURRENT CATEGORIES"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -178,7 +190,9 @@ class LegacyNatureScopeViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = "Nature Scope"
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
 
     private func setupUI() {
@@ -277,7 +291,11 @@ class LegacyNatureScopeViewController: UIViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = category.description
         descriptionLabel.font = serifNatureFont(size: 15)
-        descriptionLabel.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            descriptionLabel.textColor = .secondaryLabel
+        } else {
+            descriptionLabel.textColor = .gray
+        }
         descriptionLabel.numberOfLines = 0
         // Make italic
         if let italicDescriptor = descriptionLabel.font.fontDescriptor.withSymbolicTraits(.traitItalic) {
@@ -452,7 +470,11 @@ class LegacyNatureScopeMapViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = roundedNatureFont(size: 14, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -461,7 +483,7 @@ class LegacyNatureScopeMapViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 13.0, *) {
             button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-            button.tintColor = .secondaryLabel
+            button.tintColor = .gray
         } else {
             button.setTitle("✕", for: .normal)
         }
@@ -516,7 +538,9 @@ class LegacyNatureScopeMapViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = "Map"
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
 
     private func setupUI() {
@@ -544,7 +568,7 @@ class LegacyNatureScopeMapViewController: UIViewController {
 
             eventInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             eventInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            eventInfoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            eventInfoView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -16),
             eventInfoView.heightAnchor.constraint(equalToConstant: 140),
 
             closeButton.topAnchor.constraint(equalTo: eventInfoView.topAnchor, constant: 12),
@@ -656,23 +680,36 @@ extension LegacyNatureScopeMapViewController: MKMapViewDelegate {
         guard let eventAnnotation = annotation as? EventAnnotation else { return nil }
 
         let identifier = "EventMarker"
-        var view: MKMarkerAnnotationView
 
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
-            view = dequeuedView
-            view.annotation = annotation
+        if #available(iOS 11.0, *) {
+            var view: MKMarkerAnnotationView
+
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+                view = dequeuedView
+                view.annotation = annotation
+            } else {
+                view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            }
+
+            let categoryId = eventAnnotation.event.categories?.first?.id ?? ""
+            view.markerTintColor = markerColorLegacy(for: categoryId)
+
+            if #available(iOS 13.0, *) {
+                view.glyphImage = UIImage(systemName: markerImageLegacy(for: categoryId))
+            }
+
+            return view
         } else {
-            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            // Fallback for older iOS
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinView?.canShowCallout = true
+            } else {
+                pinView?.annotation = annotation
+            }
+            return pinView
         }
-
-        let categoryId = eventAnnotation.event.categories?.first?.id ?? ""
-        view.markerTintColor = markerColorLegacy(for: categoryId)
-
-        if #available(iOS 13.0, *) {
-            view.glyphImage = UIImage(systemName: markerImageLegacy(for: categoryId))
-        }
-
-        return view
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -763,7 +800,11 @@ private func markerColorLegacy(for categoryId: String) -> UIColor {
     case "snow", "9":
         return .white
     case "tempextremes", "10":
-        return .systemCyan
+        if #available(iOS 15.0, *) {
+            return .systemCyan
+        } else {
+            return .cyan
+        }
     case "volcanoes", "11":
         return .systemRed
     case "watercolor", "12":

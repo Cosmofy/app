@@ -12,6 +12,7 @@ import SwiftUI
 
 var complete: Bool = false
 
+@available(iOS 17.0, *)
 struct MessageRowView: View {
     @Environment(\.colorScheme) private var colorScheme
     let message: MessageRow

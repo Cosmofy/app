@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 /*
 -----------------------------------------------------------------------------
 File Name: API_OPENAI.swift
@@ -10,8 +11,8 @@ Author: Arryan Bhatnagar
 Project: Cosmofy 4th Edition
 -----------------------------------------------------------------------------
 */
- 
- 
+
+
 /* MARK: imports */
 import Foundation
 import Combine
@@ -23,6 +24,7 @@ var AES_Complete: Bool = false
    ViewModel for interacting with the OpenAI API
  */
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 class InteractingViewModel: ObservableObject {
     
     @Published var isInteractingWithChatGPT = false
@@ -105,6 +107,7 @@ class InteractingViewModel: ObservableObject {
 /* MARK: class API
    API client for communicating with LiteLLM.
  */
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 class API: @unchecked Sendable {
 
     private let systemMessage: Message
@@ -331,6 +334,7 @@ class API: @unchecked Sendable {
 }
 
 /* MARK: API Error */
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 struct APIError: LocalizedError {
     let message: String
 
@@ -342,6 +346,7 @@ struct APIError: LocalizedError {
 }
 
 /* MARK: extension Data */
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Data {
     init?(hexString: String) {
         let len = hexString.count / 2
@@ -358,4 +363,4 @@ extension Data {
         self = data
     }
 }
-
+#endif

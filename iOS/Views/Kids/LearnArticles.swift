@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct SunArticle: View {
     var body: some View {
         WebView(urlString: "https://kids.nationalgeographic.com/space/article/sun")
@@ -19,6 +20,7 @@ struct SunArticle: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct AsteroidsArticle: View {
     var body: some View {
         WebView(urlString: "https://kids.nationalgeographic.com/space/article/asteroids")
@@ -30,6 +32,7 @@ struct AsteroidsArticle: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct TheMoonLandingArticle: View {
     var body: some View {
         WebView(urlString: "https://kids.nationalgeographic.com/history/article/moon-landing")

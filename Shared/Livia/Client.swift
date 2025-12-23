@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  GraphQLClient.swift
 //  Cosmofy
@@ -9,10 +10,11 @@ import Foundation
 
 // MARK: - GraphQL Client
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 class GraphQLClient {
     static let shared = GraphQLClient()
 
-    private let endpoint = URL(string: "https://livia.arryan.xyz/graphql")!
+    private let endpoint = URL(string: "https://prod3.livia.arryan.xyz/graphql")!
     private let session = URLSession.shared
 
     private init() {}
@@ -89,3 +91,4 @@ enum GraphQLError: LocalizedError {
         }
     }
 }
+#endif

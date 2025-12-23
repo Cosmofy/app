@@ -10,6 +10,7 @@ import SwiftUI
 import SceneKit
 import Charts
 
+@available(iOS 17.0, *)
 struct AnimatedPlanetTemp: Identifiable {
     let id: String
     let name: String
@@ -17,6 +18,7 @@ struct AnimatedPlanetTemp: Identifiable {
     var isAnimated: Bool = false
 }
 
+@available(iOS 17.0, *)
 struct PlanetDetailView: View {
 
     var planet: GQLPlanet
@@ -495,6 +497,7 @@ struct PlanetDetailView: View {
 
 // MARK: - Supporting Views
 
+@available(iOS 17.0, *)
 struct PlanetPropertyView: View {
     var title: String
     var value: String
@@ -533,6 +536,7 @@ struct PlanetPropertyView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct AtmosphereView: View {
     var color: Color
     var atmosphere: GQLComponent
@@ -583,6 +587,7 @@ struct AtmosphereView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct FullScreenPlanetView: View {
     let planetName: String
     let color: Color

@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Queries.swift
 //  Cosmofy
@@ -9,6 +10,7 @@ import Foundation
 
 // MARK: - Queries
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 enum Queries {
 
     // MARK: Health Check
@@ -156,3 +158,4 @@ enum Queries {
         }
     """
 }
+#endif

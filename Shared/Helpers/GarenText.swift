@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  GarenText.swift
 //  Cosmofy
@@ -8,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct GarenText: View {
 
     var text: String
@@ -92,6 +94,7 @@ struct GarenText: View {
     }
 }
 
+@available(iOS 17.0, *)
 fileprivate extension View {
     @ViewBuilder
     func customOnChange<T: Equatable>(value: T, result: @escaping (T) -> ()) -> some View {
@@ -108,3 +111,4 @@ fileprivate extension View {
         }
     }
 }
+#endif

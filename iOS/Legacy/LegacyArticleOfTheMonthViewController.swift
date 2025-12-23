@@ -64,7 +64,9 @@ class LegacyArticleOfTheMonthViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = "Articles"
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
     }
 
     private func setupUI() {
@@ -226,7 +228,11 @@ class ArticleCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = serifArticleFont(size: 14) // .body equivalent
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         label.textAlignment = .center
         return label
     }()
@@ -264,7 +270,11 @@ class ArticleCell: UICollectionViewCell {
         } else {
             label.font = baseFont
         }
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         label.numberOfLines = 1
         return label
     }()
@@ -415,7 +425,9 @@ class LegacyWebViewController: UIViewController {
 
     private func setupUI() {
         title = pageTitle
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
 
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground

@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //  ========================================
 //  Models.swift
 //  Cosmofy
@@ -62,3 +63,4 @@ struct StreamMessage: Decodable {
     let content: String?
     let role: String?
 }
+#endif

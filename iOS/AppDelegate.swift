@@ -19,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        // TEMP: Test Legacy UIKit TabBar
-        window?.rootViewController = LegacyTabBarController()
-        /*
         #if swift(>=5.9)
         if #available(iOS 17.0, *) {
             // iOS 17+ gets SwiftUI
@@ -34,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Fallback for older Swift
         window?.rootViewController = LegacyTabBarController()
         #endif
-        */
 
         window?.makeKeyAndVisible()
         return true

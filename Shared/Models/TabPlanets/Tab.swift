@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Tab.swift
 //  Cosmofy
@@ -24,3 +25,4 @@ enum Tab: String, CaseIterable {
         }
     }
 }
+#endif

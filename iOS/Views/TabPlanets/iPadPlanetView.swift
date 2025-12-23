@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import SceneKit
 
+@available(iOS 17.0, *)
 struct iPadPlanetView: View {
     
     var planet: Planet
@@ -160,10 +161,12 @@ struct iPadPlanetView: View {
 
 
 
+@available(iOS 17.0, *)
 #Preview {
     iPadPlanetView(planet: neptunePlanet)
 }
 
+@available(iOS 17.0, *)
 struct SomeView: View {
     let backgroundGradient = LinearGradient(
         colors: [Color.cyan, Color.blue],
@@ -209,6 +212,7 @@ struct SomeView: View {
 
 }
 
+@available(iOS 17.0, *)
 struct iPadAtmosphereView: View {
     var planet: Planet
     var atmosphere: Atmosphere

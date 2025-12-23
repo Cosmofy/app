@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  GQLViewModel.swift
 //  Cosmofy
@@ -13,6 +14,7 @@ import AppKit
 import UIKit
 #endif
 
+@available(iOS 17.0, *)
 @MainActor
 class GQLViewModel: ObservableObject {
 
@@ -153,3 +155,4 @@ class GQLViewModel: ObservableObject {
         }
     }
 }
+#endif

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct PlanetsView: View {
 
     @ObservedObject var viewModel: GQLViewModel
@@ -136,6 +137,7 @@ struct PlanetsView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct PlanetBlock: View {
     var planet: GQLPlanet
     @ObservedObject var viewModel: GQLViewModel

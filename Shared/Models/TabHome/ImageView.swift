@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 import SwiftUI
 import Combine
 #if !os(tvOS)
@@ -10,6 +11,7 @@ var done = false
 #if os(macOS)
 import AppKit
 
+@available(iOS 17.0, *)
 class ImageLoader: ObservableObject {
     @Published var downloadedImage: NSImage? = nil
     private var cancellable: AnyCancellable?
@@ -31,6 +33,7 @@ class ImageLoader: ObservableObject {
     }
 }
 #else
+@available(iOS 17.0, *)
 class ImageLoader: ObservableObject {
     @Published var downloadedImage: UIImage? = nil
     private var cancellable: AnyCancellable?
@@ -53,6 +56,7 @@ class ImageLoader: ObservableObject {
 }
 #endif
 
+@available(iOS 17.0, *)
 struct Photo: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         ProxyRepresentation(exporting: \.image)
@@ -63,6 +67,7 @@ struct Photo: Transferable {
 }
 
 // View for displaying images
+@available(iOS 17.0, *)
 struct ImageView: View {
     @ObservedObject var imageLoader = ImageLoader()
     @State private var isSaved = false
@@ -189,6 +194,7 @@ func addOneDay(from dateString: String) -> String? {
 #if os(macOS)
 import AppKit
 
+@available(iOS 17.0, *)
 struct WebView: NSViewRepresentable {
     let urlString: String
 
@@ -207,25 +213,63 @@ struct WebView: NSViewRepresentable {
 
 #elseif !os(tvOS)
 
+@available(iOS 17.0, *)
 struct WebView: UIViewRepresentable {
 
     let urlString: String
+    var isScrollEnabled: Bool = true
 
     func makeUIView(context: Context) -> WKWebView {
-        guard let url = URL(string: urlString) else {
-            return WKWebView()
-        }
-        let webView = WKWebView()
-        webView.load(URLRequest(url: url))
+        let config = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []
+        config.preferences.isElementFullscreenEnabled = true
+        let webView = WKWebView(frame: .zero, configuration: config)
+        webView.scrollView.isScrollEnabled = isScrollEnabled
+        webView.scrollView.bounces = isScrollEnabled
         return webView
     }
 
-    func updateUIView(_ uiView: WKWebView, context: Context) {
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        guard webView.url == nil else { return }
+
+        if urlString.contains("youtube.com/embed") {
+            // Extract video ID and build nocookie URL
+            let videoId = urlString
+                .replacingOccurrences(of: "https://www.youtube.com/embed/", with: "")
+                .components(separatedBy: "?").first ?? ""
+
+            let src = "https://www.youtube-nocookie.com/embed/\(videoId)?playsinline=1&modestbranding=1&rel=0&enablejsapi=1&origin=https://www.youtube-nocookie.com"
+
+            let html = """
+            <html>
+            <head>
+                <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+            </head>
+            <body style="margin:0; padding:0; background:black;">
+                <iframe
+                    width="100%"
+                    height="100%"
+                    src="\(src)"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowfullscreen
+                    webkitallowfullscreen
+                    mozallowfullscreen>
+                </iframe>
+            </body>
+            </html>
+            """
+            webView.loadHTMLString(html, baseURL: URL(string: "https://www.youtube-nocookie.com"))
+        } else if let url = URL(string: urlString) {
+            webView.load(URLRequest(url: url))
+        }
     }
 }
 
 #endif
 
+@available(iOS 17.0, *)
 struct WordByWordTextView: View {
     let fullText: String
     let animationInterval: TimeInterval
@@ -277,3 +321,4 @@ func convertDateString(dateString: String) -> String {
     dateFormatter.dateStyle = .full
     return dateFormatter.string(from: date)
 }
+#endif

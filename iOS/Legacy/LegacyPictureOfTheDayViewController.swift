@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 // MARK: - Rounded Font Helper (if not already available)
 
@@ -72,7 +73,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "ASTRONOMY PICTURE OF THE DAY"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -125,7 +130,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         } else {
             label.font = baseFont
         }
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -142,6 +151,31 @@ class LegacyPictureOfTheDayViewController: UIViewController {
 
     // Image height constraint (will be updated based on aspect ratio)
     private var imageHeightConstraint: NSLayoutConstraint?
+
+    // Video WebView for YouTube embeds
+    private lazy var videoWebView: WKWebView = {
+        let config = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = true
+        if #available(iOS 10.0, *) {
+            config.mediaTypesRequiringUserActionForPlayback = []
+        }
+        if #available(iOS 14.0, *) {
+            config.defaultWebpagePreferences.allowsContentJavaScript = true
+        }
+        if #available(iOS 15.4, *) {
+            config.preferences.isElementFullscreenEnabled = true
+        }
+        let webView = WKWebView(frame: .zero, configuration: config)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.bounces = false
+        webView.backgroundColor = .black
+        webView.isOpaque = false
+        webView.isHidden = true
+        return webView
+    }()
+
+    private var videoWebViewHeightConstraint: NSLayoutConstraint?
 
     // Download Button
     private lazy var downloadButton: UIButton = {
@@ -170,7 +204,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         button.layer.cornerRadius = 16
-        button.tintColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            button.tintColor = .secondaryLabel
+        } else {
+            button.tintColor = .gray
+        }
         if #available(iOS 13.0, *) {
             let config = UIImage.SymbolConfiguration(weight: .medium)
             button.setImage(UIImage(systemName: "square.and.arrow.up", withConfiguration: config), for: .normal)
@@ -185,7 +223,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "A BRIEF EXPLANATION"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -220,7 +262,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "SUMMARY"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         label.isHidden = true
         return label
     }()
@@ -257,7 +303,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         label.isHidden = true
         return label
     }()
@@ -286,7 +336,9 @@ class LegacyPictureOfTheDayViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = "Picture of the Day"
-        navigationItem.largeTitleDisplayMode = .never
+        if #available(iOS 11.0, *) {
+            navigationItem.largeTitleDisplayMode = .never
+        }
 
         // Date picker button (simplified for legacy - just show today's date)
         if #available(iOS 13.0, *) {
@@ -316,6 +368,7 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         contentView.addSubview(titleLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(imageView)
+        contentView.addSubview(videoWebView)
         contentView.addSubview(buttonStack)
         contentView.addSubview(explanationHeaderLabel)
         contentView.addSubview(explanationDivider)
@@ -370,6 +423,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
+            // Video WebView (same position as image, but hidden by default)
+            videoWebView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 16),
+            videoWebView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            videoWebView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+
             // Button Stack
             buttonStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
             buttonStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -420,6 +478,11 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         // Default image height (will be updated when image loads)
         imageHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 250)
         imageHeightConstraint?.isActive = true
+
+        // Video height constraint (16:9 aspect ratio)
+        let videoWidth = UIScreen.main.bounds.width - 32
+        videoWebViewHeightConstraint = videoWebView.heightAnchor.constraint(equalToConstant: videoWidth * 9 / 16)
+        videoWebViewHeightConstraint?.isActive = true
     }
 
     // MARK: - Data Loading
@@ -450,14 +513,22 @@ class LegacyPictureOfTheDayViewController: UIViewController {
         titleLabel.text = picture.title ?? "Untitled"
         dateLabel.text = formatDate(picture.date)
 
-        // Load image
+        // Load image or video
         if let mediaUrl = picture.media, picture.media_type == "image" {
             loadImage(from: mediaUrl)
-        } else if picture.media_type == "video" {
-            // For videos, show placeholder or thumbnail
-            imageView.image = nil
-            imageView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
-            imageHeightConstraint?.constant = 200
+            imageView.isHidden = false
+            videoWebView.isHidden = true
+            downloadButton.isEnabled = true
+            shareButton.isEnabled = true
+        } else if picture.media_type == "video", let videoUrl = picture.media {
+            // Show video player with YouTube fix
+            imageView.isHidden = true
+            videoWebView.isHidden = false
+            downloadButton.isEnabled = false
+            shareButton.isEnabled = false
+            downloadButton.alpha = 0.5
+            shareButton.alpha = 0.5
+            loadVideo(from: videoUrl)
         }
 
         // Explanation
@@ -507,6 +578,45 @@ class LegacyPictureOfTheDayViewController: UIViewController {
             }
         }
         task.resume()
+    }
+
+    private func loadVideo(from urlString: String) {
+        // Handle YouTube embeds with nocookie domain for better compatibility
+        if urlString.contains("youtube.com/embed") {
+            // Extract video ID and build nocookie URL
+            let videoId = urlString
+                .replacingOccurrences(of: "https://www.youtube.com/embed/", with: "")
+                .components(separatedBy: "?").first ?? ""
+
+            let src = "https://www.youtube-nocookie.com/embed/\(videoId)?playsinline=1&modestbranding=1&rel=0&enablejsapi=1&origin=https://www.youtube-nocookie.com"
+
+            let html = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+                <style>
+                    * { margin: 0; padding: 0; }
+                    html, body { width: 100%; height: 100%; background: black; }
+                    iframe { width: 100%; height: 100%; border: none; }
+                </style>
+            </head>
+            <body>
+                <iframe
+                    src="\(src)"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowfullscreen
+                    webkitallowfullscreen
+                    mozallowfullscreen>
+                </iframe>
+            </body>
+            </html>
+            """
+            videoWebView.loadHTMLString(html, baseURL: URL(string: "https://www.youtube-nocookie.com"))
+        } else if let url = URL(string: urlString) {
+            // For non-YouTube URLs, load directly
+            videoWebView.load(URLRequest(url: url))
+        }
     }
 
     private func formatDate(_ dateString: String?) -> String {

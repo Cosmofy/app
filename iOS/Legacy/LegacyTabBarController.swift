@@ -103,8 +103,10 @@ class LegacyPlanetsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Planets"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.largeTitleDisplayMode = .always
+        }
 
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground
@@ -212,7 +214,11 @@ class LegacyPlanetsViewController: UIViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.text = planet.description ?? ""
         descriptionLabel.font = roundedPlanetFont(size: 15, weight: .regular) // .subheadline equivalent
-        descriptionLabel.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            descriptionLabel.textColor = .secondaryLabel
+        } else {
+            descriptionLabel.textColor = .gray
+        }
         descriptionLabel.numberOfLines = 0
 
         textStack.addArrangedSubview(nameLabel)
@@ -222,7 +228,11 @@ class LegacyPlanetsViewController: UIViewController {
         let chevronImageView = UIImageView()
         chevronImageView.translatesAutoresizingMaskIntoConstraints = false
         chevronImageView.contentMode = .scaleAspectFit
-        chevronImageView.tintColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            chevronImageView.tintColor = .secondaryLabel
+        } else {
+            chevronImageView.tintColor = .gray
+        }
         if #available(iOS 13.0, *) {
             chevronImageView.image = UIImage(systemName: "chevron.right")
         } else {
@@ -347,8 +357,10 @@ class LegacyPlanetDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = planet.name
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.largeTitleDisplayMode = .always
+        }
 
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground
@@ -498,13 +510,21 @@ class LegacyPlanetDetailViewController: UIViewController {
         let observationTitleLabel = UILabel()
         observationTitleLabel.text = "First Human Visual Observation"
         observationTitleLabel.font = roundedPlanetFont(size: 15, weight: .regular)
-        observationTitleLabel.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            observationTitleLabel.textColor = .secondaryLabel
+        } else {
+            observationTitleLabel.textColor = .gray
+        }
         observationTitleLabel.numberOfLines = 0
 
         let observationValueLabel = UILabel()
         observationValueLabel.text = planet.visual ?? "Unknown"
         observationValueLabel.font = roundedPlanetFont(size: 15, weight: .regular)
-        observationValueLabel.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            observationValueLabel.textColor = .secondaryLabel
+        } else {
+            observationValueLabel.textColor = .gray
+        }
         observationValueLabel.numberOfLines = 0
 
         leftStack.addArrangedSubview(observationTitleLabel)
@@ -566,51 +586,68 @@ class LegacyPlanetDetailViewController: UIViewController {
         container.layer.cornerRadius = 30
         container.clipsToBounds = true
 
+        let planetName = planet.name?.lowercased() ?? "earth"
+        planetSceneName = planetName
+
+        // 3D SceneKit view - works on iOS 9+
         let sceneView = SCNView()
         sceneView.translatesAutoresizingMaskIntoConstraints = false
         sceneView.backgroundColor = .black
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
 
-        // Create scene using the existing PlanetNode logic
-        let planetName = planet.name?.lowercased() ?? "earth"
-        planetSceneName = planetName
-        let (scene, _) = createPlanetScene(planetName: planetName, isFullScreen: false, platform: nil)
+        // Create scene using Legacy planet scene creation
+        let scene = createLegacyPlanetScene(planetName: planetName, isFullScreen: false)
         sceneView.scene = scene
         planetSceneView = sceneView
 
-        // Expand button (top right) - rounded rectangle with rotated expand icon
+        container.addSubview(sceneView)
+
+        NSLayoutConstraint.activate([
+            sceneView.topAnchor.constraint(equalTo: container.topAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+            sceneView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            sceneView.trailingAnchor.constraint(equalTo: container.trailingAnchor)
+        ])
+
+        // Expand button (top right)
         let expandButton = UIButton(type: .system)
         expandButton.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 13.0, *) {
             let config = UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold)
-            // Use the more rotated version of the expand arrows
             expandButton.setImage(UIImage(systemName: "arrow.up.backward.and.arrow.down.forward", withConfiguration: config), for: .normal)
             expandButton.tintColor = .white
+        } else {
+            expandButton.setTitle("⤢", for: .normal)
+            expandButton.setTitleColor(.white, for: .normal)
         }
         expandButton.backgroundColor = UIColor.white.withAlphaComponent(0.2)
-        expandButton.layer.cornerRadius = 8  // Rounded rectangle instead of circle
+        expandButton.layer.cornerRadius = 8
         expandButton.addTarget(self, action: #selector(expandPlanetView), for: .touchUpInside)
 
-        // Apple SceneKit label (bottom left) - bigger font, full white, more padding
+        container.addSubview(expandButton)
+
+        NSLayoutConstraint.activate([
+            expandButton.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
+            expandButton.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+            expandButton.widthAnchor.constraint(equalToConstant: 36),
+            expandButton.heightAnchor.constraint(equalToConstant: 32)
+        ])
+
+        // SceneKit label (bottom left)
         let sceneKitLabel = UILabel()
         sceneKitLabel.translatesAutoresizingMaskIntoConstraints = false
         sceneKitLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         sceneKitLabel.textColor = .white
+        sceneKitLabel.text = " SceneKit"
 
-        // Apple logo + SceneKit text
-        let attachment = NSTextAttachment()
-        if #available(iOS 13.0, *) {
-            let appleLogoConfig = UIImage.SymbolConfiguration(pointSize: 15, weight: .medium)
-            attachment.image = UIImage(systemName: "apple.logo", withConfiguration: appleLogoConfig)?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        }
-        let attributedString = NSMutableAttributedString(attachment: attachment)
-        attributedString.append(NSAttributedString(string: " SceneKit"))
-        sceneKitLabel.attributedText = attributedString
-
-        container.addSubview(sceneView)
-        container.addSubview(expandButton)
         container.addSubview(sceneKitLabel)
+
+        NSLayoutConstraint.activate([
+            sceneKitLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            sceneKitLabel.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -16)
+        ])
+
         outerContainer.addSubview(container)
 
         // Match horizontal padding to description text below (32pt)
@@ -620,20 +657,7 @@ class LegacyPlanetDetailViewController: UIViewController {
             container.topAnchor.constraint(equalTo: outerContainer.topAnchor),
             container.bottomAnchor.constraint(equalTo: outerContainer.bottomAnchor),
             container.leadingAnchor.constraint(equalTo: outerContainer.leadingAnchor, constant: 32),
-            container.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -32),
-
-            sceneView.topAnchor.constraint(equalTo: container.topAnchor),
-            sceneView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-            sceneView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            sceneView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-
-            expandButton.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
-            expandButton.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
-            expandButton.widthAnchor.constraint(equalToConstant: 36),
-            expandButton.heightAnchor.constraint(equalToConstant: 32),
-
-            sceneKitLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
-            sceneKitLabel.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -16)
+            container.trailingAnchor.constraint(equalTo: outerContainer.trailingAnchor, constant: -32)
         ])
 
         return outerContainer
@@ -689,7 +713,11 @@ class LegacyPlanetDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = title
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
 
         let divider = UIView()
         divider.translatesAutoresizingMaskIntoConstraints = false
@@ -755,7 +783,11 @@ class LegacyPlanetDetailViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = roundedPlanetFont(size: 15, weight: .medium)
-        titleLabel.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            titleLabel.textColor = .secondaryLabel
+        } else {
+            titleLabel.textColor = .gray
+        }
 
         let valueStack = UIStackView()
         valueStack.axis = .horizontal
@@ -794,7 +826,11 @@ class LegacyPlanetDetailViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.text = "Atmosphere"
         titleLabel.font = roundedPlanetFont(size: 15, weight: .medium)
-        titleLabel.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            titleLabel.textColor = .secondaryLabel
+        } else {
+            titleLabel.textColor = .gray
+        }
 
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -991,17 +1027,6 @@ class LegacyFullscreenPlanetViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
 
-        // SceneKit view
-        let sceneView = SCNView()
-        sceneView.translatesAutoresizingMaskIntoConstraints = false
-        sceneView.backgroundColor = .black
-        sceneView.allowsCameraControl = true
-        sceneView.autoenablesDefaultLighting = true
-
-        // Create scene using the existing PlanetNode logic (fullscreen mode)
-        let (scene, _) = createPlanetScene(planetName: planetName, isFullScreen: true, platform: nil)
-        sceneView.scene = scene
-
         // Close button (top right)
         let closeButton = UIButton(type: .system)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -1015,16 +1040,36 @@ class LegacyFullscreenPlanetViewController: UIViewController {
         }
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
 
+        // 3D SceneKit view - works on iOS 9+
+        let sceneView = SCNView()
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        sceneView.backgroundColor = .black
+        sceneView.allowsCameraControl = true
+        sceneView.autoenablesDefaultLighting = true
+
+        // Create scene using Legacy planet scene creation (iOS 9+)
+        let scene = createLegacyPlanetScene(planetName: planetName, isFullScreen: true)
+        sceneView.scene = scene
+
         view.addSubview(sceneView)
-        view.addSubview(closeButton)
 
         NSLayoutConstraint.activate([
             sceneView.topAnchor.constraint(equalTo: view.topAnchor),
             sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             sceneView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            sceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            sceneView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
 
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+        view.addSubview(closeButton)
+
+        // Close button constraint with iOS version check
+        if #available(iOS 11.0, *) {
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        } else {
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 36).isActive = true
+        }
+
+        NSLayoutConstraint.activate([
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             closeButton.widthAnchor.constraint(equalToConstant: 40),
             closeButton.heightAnchor.constraint(equalToConstant: 40)
@@ -1107,7 +1152,9 @@ class LegacyLiviaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Livia"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
 
         if #available(iOS 13.0, *) {
             view.backgroundColor = .systemBackground
@@ -1138,7 +1185,11 @@ class LegacyLiviaViewController: UIViewController {
         inputContainer.addSubview(textField)
         inputContainer.addSubview(sendButton)
 
-        inputContainerBottomConstraint = inputContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        if #available(iOS 11.0, *) {
+            inputContainerBottomConstraint = inputContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        } else {
+            inputContainerBottomConstraint = inputContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        }
 
         NSLayoutConstraint.activate([
             inputContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -1185,7 +1236,10 @@ class LegacyLiviaViewController: UIViewController {
 
     @objc private func keyboardWillShow(_ notification: Notification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+        var keyboardHeight = keyboardFrame.height
+        if #available(iOS 11.0, *) {
+            keyboardHeight -= view.safeAreaInsets.bottom
+        }
         inputContainerBottomConstraint.constant = -keyboardHeight
 
         UIView.animate(withDuration: 0.3) {
@@ -1370,7 +1424,11 @@ class LiviaChatMessageCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -1493,6 +1551,109 @@ class LiviaChatMessageCell: UITableViewCell {
         typingDotsView.isHidden = true
         messageLabel.isHidden = false
     }
+}
+
+// MARK: - Legacy Planet Scene Creation (iOS 9+)
+// Pure SceneKit implementation without SwiftUI/Combine dependencies
+
+private func createLegacyPlanetScene(planetName: String, isFullScreen: Bool) -> SCNScene {
+    let scene = SCNScene()
+    scene.background.contents = UIColor.black
+
+    let axialTilts: [String: Double] = [
+        "mercury": -0.034,
+        "venus": -177.4,
+        "earth": -23.4,
+        "mars": -25.2,
+        "jupiter": -3.1,
+        "saturn": -26.7,
+        "uranus": -97.8,
+        "neptune": -28.3
+    ]
+
+    let semiMinorAxes: [String: Double] = [
+        "mercury": 1.0,
+        "venus": 1.0,
+        "earth": 1.0,
+        "mars": 1.0,
+        "jupiter": 0.935,
+        "saturn": 0.902,
+        "uranus": 0.97,
+        "neptune": 0.97
+    ]
+
+    let axialTilt = axialTilts[planetName.lowercased()] ?? 0.0
+    let semiMinorAxis = semiMinorAxes[planetName.lowercased()] ?? 1.0
+
+    // Create the planet sphere
+    let sphereGeometry = SCNSphere(radius: 1.0)
+    sphereGeometry.segmentCount = 72
+    let planetNode = SCNNode(geometry: sphereGeometry)
+
+    // Apply scaling for oblate planets
+    planetNode.scale = SCNVector3(x: Float(1.0), y: Float(semiMinorAxis), z: Float(1.0))
+
+    // Apply axial tilt
+    planetNode.eulerAngles = SCNVector3(x: 0, y: 0, z: Float(axialTilt * .pi / 180))
+
+    // Apply texture
+    let material = SCNMaterial()
+    let textureName = "map-\(planetName.lowercased())"
+    material.diffuse.contents = UIImage(named: textureName)
+    material.diffuse.mipFilter = SCNFilterMode.linear
+    sphereGeometry.materials = [material]
+
+    // Special materials for Earth (disabled due to Metal pixel format issues on iOS 26 simulator)
+    // if planetName.lowercased() == "earth" {
+    //     material.specular.contents = UIImage(named: "map-earth-specular")
+    //     material.emission.contents = UIImage(named: "map-earth-emission")
+    //     material.normal.contents = UIImage(named: "map-earth-normal")
+    // }
+
+    // Rotation animation
+    let rotateAction = SCNAction.rotateBy(x: 0, y: 0.6, z: 0, duration: 10)
+    let repeatAction = SCNAction.repeatForever(rotateAction)
+    planetNode.runAction(repeatAction)
+
+    planetNode.position = SCNVector3(0, -0.15, 0)
+
+    // Add Saturn's rings if needed
+    if planetName.lowercased() == "saturn" {
+        let saturnLoop = SCNBox(width: 4.444, height: 0, length: 5.556, chamferRadius: 0)
+        let ringMaterial = SCNMaterial()
+        ringMaterial.diffuse.contents = UIImage(named: "map-saturn-ring")
+        saturnLoop.materials = [ringMaterial]
+        let loopNode = SCNNode(geometry: saturnLoop)
+        loopNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        loopNode.eulerAngles = SCNVector3(x: 0, y: 0, z: Float(-26.7 * .pi / 180))
+        planetNode.addChildNode(loopNode)
+    }
+
+    scene.rootNode.addChildNode(planetNode)
+
+    // Camera setup
+    let cameraNode = SCNNode()
+    cameraNode.camera = SCNCamera()
+
+    if isFullScreen {
+        if planetName.lowercased() == "saturn" {
+            cameraNode.position = SCNVector3(x: 0, y: 3, z: 10)
+            cameraNode.eulerAngles = SCNVector3(x: Float(-Double.pi / 10), y: 0, z: 0)
+        } else {
+            cameraNode.position = SCNVector3(x: 0, y: 0, z: 7)
+        }
+    } else {
+        if planetName.lowercased() == "saturn" {
+            cameraNode.position = SCNVector3(x: 0, y: 1.5, z: 5.5)
+            cameraNode.eulerAngles = SCNVector3(x: Float(-Double.pi / 10), y: 0, z: 0)
+        } else {
+            cameraNode.position = SCNVector3(x: 0, y: 0, z: 3.5)
+        }
+    }
+
+    scene.rootNode.addChildNode(cameraNode)
+
+    return scene
 }
 
 // MARK: - Font Helpers

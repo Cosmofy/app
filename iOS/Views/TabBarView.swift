@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct TabBarView: View {
 
     @ObservedObject var gqlViewModel: GQLViewModel
@@ -40,6 +41,7 @@ struct TabBarView: View {
 
 }
 
+@available(iOS 17.0, *)
 struct TabBarKids: View {
     @ObservedObject var gqlViewModel: GQLViewModel
 

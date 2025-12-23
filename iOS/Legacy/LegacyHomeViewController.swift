@@ -50,7 +50,11 @@ class LegacyHomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Begin your space journey"
         label.font = roundedFont(size: 17, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -79,7 +83,11 @@ class LegacyHomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "What would you like to do today?"
         label.font = roundedFont(size: 17, weight: .regular)
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         return label
     }()
 
@@ -137,7 +145,9 @@ class LegacyHomeViewController: UIViewController {
 
     private func setupNavigationBar() {
         title = "Cosmofy"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
 
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
@@ -318,7 +328,11 @@ class NavigationCardView: UIControl {
         } else {
             label.font = roundedFont(size: 18, weight: .medium)
         }
-        label.textColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            label.textColor = .secondaryLabel
+        } else {
+            label.textColor = .gray
+        }
         label.numberOfLines = 0
         return label
     }()
@@ -327,7 +341,11 @@ class NavigationCardView: UIControl {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = .secondaryLabel
+        if #available(iOS 13.0, *) {
+            iv.tintColor = .secondaryLabel
+        } else {
+            iv.tintColor = .gray
+        }
         if #available(iOS 13.0, *) {
             iv.image = UIImage(systemName: "chevron.right")
         } else {

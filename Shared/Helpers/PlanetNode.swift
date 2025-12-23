@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //  ========================================
 //  PlanetNode.swift
 //  Cosmofy
@@ -22,6 +23,7 @@ import SceneKit
 import SwiftUI
 import Combine
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 class PlanetNode: SCNNode {
     var global = 0.0
 
@@ -98,6 +100,7 @@ class PlanetNode: SCNNode {
     }
 }
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 func createPlanetScene(planetName: String, isFullScreen: Bool, platform: String?) -> (scene: SCNScene, planetNode: PlanetNode) {
     let scene = SCNScene()
     scene.background.contents = PlatformColor.black
@@ -169,6 +172,7 @@ func createPlanetScene(planetName: String, isFullScreen: Bool, platform: String?
     return (scene, planetNode)
 }
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 class Coordinator: ObservableObject {
     var scene: SCNScene
     var planetNode: PlanetNode
@@ -271,3 +275,4 @@ class Coordinator: ObservableObject {
         cameraNode.position.z += 0.5
     }
 }
+#endif

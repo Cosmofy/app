@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1610"
+   LastUpgradeVersion = "2610"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2FBBB6542945531500BBB072"
+               BlueprintIdentifier = "0BDBC9C82C1D956E00F720F2"
                BuildableName = "Cosmofy.app"
-               BlueprintName = "Cosmofy"
+               BlueprintName = "watchOS"
                ReferencedContainer = "container:Cosmofy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2FBBB6542945531500BBB072"
+            BlueprintIdentifier = "0BDBC9C82C1D956E00F720F2"
             BuildableName = "Cosmofy.app"
-            BlueprintName = "Cosmofy"
+            BlueprintName = "watchOS"
             ReferencedContainer = "container:Cosmofy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2FBBB6542945531500BBB072"
+            BlueprintIdentifier = "0BDBC9C82C1D956E00F720F2"
             BuildableName = "Cosmofy.app"
-            BlueprintName = "Cosmofy"
+            BlueprintName = "watchOS"
             ReferencedContainer = "container:Cosmofy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

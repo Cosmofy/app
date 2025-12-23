@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 // import SwiftfulLoadingIndicators // Removed for iOS 9 compatibility
 
+@available(iOS 17.0, *)
 struct CosmofyApp: App {
     @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
 
@@ -22,7 +23,7 @@ struct CosmofyApp: App {
     }
 }
 
-
+@available(iOS 17.0, *)
 struct SplashScreen: View {
     @StateObject var gqlViewModel = GQLViewModel()
     @StateObject var swiftViewModel = InteractingViewModel(api: API())
@@ -30,6 +31,7 @@ struct SplashScreen: View {
     @State private var showSplash = true
     @AppStorage("selectedProfile") var currentSelectedProfile: Int?
     @AppStorage("signed_in") var currentUserSignedIn: Bool = false
+    @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
 
     var body: some View {
         ZStack {
@@ -53,9 +55,11 @@ struct SplashScreen: View {
                     .environmentObject(swiftViewModel)
             }
         }
+        .preferredColorScheme(userTheme.colorScheme)
     }
 }
 
+@available(iOS 17.0, *)
 struct NetworkErrorView: View {
     var isLoading: Bool
     var onRetry: () -> Void
@@ -123,6 +127,7 @@ struct NetworkErrorView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct SplashScreenView: View {
     var body: some View {
         ZStack {

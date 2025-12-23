@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct KidsPlanetView: View {
     
     var planet: Planet
@@ -201,6 +202,7 @@ struct KidsPlanetView: View {
 
 }
 
+@available(iOS 17.0, *)
 struct KidsAtmosphereView: View {
     var planet: Planet
     var atmosphere: Atmosphere
@@ -238,6 +240,7 @@ struct KidsAtmosphereView: View {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
     KidsPlanetView(planet: neptunePlanet)
 }

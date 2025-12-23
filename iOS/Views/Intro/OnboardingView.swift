@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct OnboardingView: View {
 
     @State var onboardingState: Int = 0
@@ -314,6 +315,7 @@ struct OnboardingView: View {
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
     OnboardingView()
 }

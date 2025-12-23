@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Planet.swift
 //  Cosmofy
@@ -8,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct Planet: Identifiable, Equatable, Hashable {
     var id = UUID()
     var name: String
@@ -59,12 +61,14 @@ struct Planet: Identifiable, Equatable, Hashable {
     }
 }
 
+@available(iOS 17.0, *)
 struct Atmosphere: Identifiable, Hashable {
     var id = UUID()
     var molar: String
     var formula: String
 }
 
+@available(iOS 17.0, *)
 let neptuneAtmosphere = [
     Atmosphere(molar: "2", formula: "H₂"),      // Hydrogen (H₂) ~80%
     Atmosphere(molar: "4", formula: "He"),      // Helium (He) ~19%
@@ -75,6 +79,7 @@ let neptuneAtmosphere = [
 
 
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let neptunePlanet = Planet(
     name: NSLocalizedString("Neptune", comment: ""),
     order: "8th",
@@ -102,6 +107,7 @@ let neptunePlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let mercuryAtmosphere = [
     Atmosphere(molar: "4", formula: "He"),     // Helium
     Atmosphere(molar: "40", formula: "Ar"),    // Argon
@@ -115,6 +121,7 @@ let mercuryAtmosphere = [
     Atmosphere(molar: "44", formula: "CO₂")    // Carbon Dioxide (CO₂)
 ]
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let mercuryPlanet = Planet(
     name: NSLocalizedString("Mercury", comment: ""),
     order: "1st",
@@ -142,6 +149,7 @@ let mercuryPlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let venusAtmosphere = [
     Atmosphere(molar: "44", formula: "CO₂"),    // Carbon Dioxide (CO₂)
     Atmosphere(molar: "18", formula: "H₂O"),    // Water Vapor (H₂O)
@@ -153,6 +161,7 @@ let venusAtmosphere = [
     Atmosphere(molar: "64", formula: "SO₂")     // Sulfur Dioxide (SO₂)
 ]
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let venusPlanet = Planet(
     name: NSLocalizedString("Venus", comment: ""),
     order: "2nd",
@@ -180,6 +189,7 @@ let venusPlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let earthAtmosphere = [
     Atmosphere(molar: "28", formula: "N₂"),     // Nitrogen (N₂) ~78%
     Atmosphere(molar: "32", formula: "O₂"),     // Oxygen (O₂) ~21%
@@ -188,6 +198,7 @@ let earthAtmosphere = [
     Atmosphere(molar: "40", formula: "Ar")      // Argon (Ar) ~0.93%
 ]
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let earthPlanet = Planet(
     name: NSLocalizedString("Earth", comment: ""),
     order: "3rd",
@@ -215,6 +226,7 @@ let earthPlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let marsAtmosphere = [
     Atmosphere(molar: "44", formula: "CO₂"),    // Carbon Dioxide (CO₂) ~95.3%
     Atmosphere(molar: "28", formula: "N₂"),     // Nitrogen (N₂) ~2.7%
@@ -224,6 +236,7 @@ let marsAtmosphere = [
 ]
 
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let marsPlanet = Planet(
     name: NSLocalizedString("Mars", comment: ""),
     order: "4th",
@@ -252,6 +265,7 @@ let marsPlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let jupiterAtmosphere = [
     Atmosphere(molar: "2", formula: "H₂"),      // Hydrogen (H₂) ~89.8%
     Atmosphere(molar: "4", formula: "He"),      // Helium (He) ~10.2%
@@ -261,6 +275,7 @@ let jupiterAtmosphere = [
 ]
 
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let jupiterPlanet = Planet(
     name: NSLocalizedString("Jupiter", comment: ""),
     order: "5th",
@@ -288,6 +303,7 @@ let jupiterPlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let saturnAtmosphere = [
     Atmosphere(molar: "2", formula: "H₂"),      // Hydrogen (H₂) ~96%
     Atmosphere(molar: "4", formula: "He"),      // Helium (He) ~3%
@@ -297,6 +313,7 @@ let saturnAtmosphere = [
 ]
 
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let saturnPlanet = Planet(
     name: NSLocalizedString("Saturn", comment: ""),
     order: "6th",
@@ -324,6 +341,7 @@ let saturnPlanet = Planet(
     ]
 )
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let uranusAtmosphere = [
     Atmosphere(molar: "2", formula: "H₂"),      // Hydrogen (H₂) ~82.5%
     Atmosphere(molar: "4", formula: "He"),      // Helium (He) ~15.2%
@@ -333,6 +351,7 @@ let uranusAtmosphere = [
 ]
 
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let uranusPlanet = Planet(
     name: NSLocalizedString("Uranus", comment: ""),
     order: "7th",
@@ -359,15 +378,18 @@ let uranusPlanet = Planet(
         "Uranus’ year lasts 84 Earth years, but its day is just 17 hours."
     ]
 )
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let innerPlanets = [
     mercuryPlanet, venusPlanet, earthPlanet, marsPlanet
 ]
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let outerPlanets = [
     jupiterPlanet, saturnPlanet, uranusPlanet, neptunePlanet
 ]
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let allPlanets = [
     mercuryPlanet, venusPlanet, earthPlanet, marsPlanet, jupiterPlanet, saturnPlanet, uranusPlanet, neptunePlanet
 ]
-
+#endif

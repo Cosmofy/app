@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct Profile: View {
     @AppStorage("selectedProfile") var selectedProfile: Int?
     @Environment(\.colorScheme) private var scheme
@@ -134,31 +135,45 @@ struct Profile: View {
         }
 
     }
-    
+
 }
 
+@available(iOS 17.0, *)
 #Preview {
     Profile()
 }
 
 
 
+@available(iOS 17.0, *)
 struct ThemeChangeView: View {
     var scheme: ColorScheme
     @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
     @Namespace private var animation
     @State private var circleOffset: CGSize
-    
+
     init(scheme: ColorScheme) {
         self.scheme = scheme
         let isDark = scheme == .dark
         self._circleOffset = .init(initialValue: CGSize(width: isDark ? 30 : 150, height: isDark ? -25 : -150))
     }
-    
+
+    /// The effective color scheme based on user's theme selection
+    private var effectiveScheme: ColorScheme {
+        switch userTheme {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        case .systemDefault:
+            return scheme
+        }
+    }
+
     var body: some View {
         VStack(spacing: 15) {
             Circle()
-                .fill(userTheme.color(scheme).gradient)
+                .fill(userTheme.color(effectiveScheme).gradient)
                 .frame(width: 150, height: 150)
                 .mask {
                     /// Inverted Mask
@@ -209,6 +224,12 @@ struct ThemeChangeView: View {
                 circleOffset = CGSize(width: isDark ? 30 : 150, height: isDark ? -25 : -150)
             }
         }
+        .onChange(of: userTheme) { _, _ in
+            let isDark = effectiveScheme == .dark
+            withAnimation(.bouncy) {
+                circleOffset = CGSize(width: isDark ? 30 : 150, height: isDark ? -25 : -150)
+            }
+        }
     }
     
     var safeArea: UIEdgeInsets {
@@ -223,6 +244,7 @@ struct ThemeChangeView: View {
 
 
 /// Theme
+@available(iOS 17.0, *)
 enum Theme: String, CaseIterable {
     case systemDefault = "Default"
     case light = "Light"

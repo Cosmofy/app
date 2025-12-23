@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //
 //  Color+Hex.swift
 //  Cosmofy
@@ -11,6 +12,7 @@ import SwiftUI
 import AppKit
 #endif
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 extension Color {
     init(hex: UInt) {
         self.init(
@@ -46,3 +48,4 @@ extension Color {
 
 
 }
+#endif

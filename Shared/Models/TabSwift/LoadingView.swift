@@ -1,3 +1,4 @@
+#if swift(>=5.9)
 //  ========================================
 //  LoadingView.swift
 //  Cosmofy
@@ -8,6 +9,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct LoadingView: View {
     var color: Color
     
@@ -56,6 +58,8 @@ struct LoadingView: View {
 }
 
 
+@available(iOS 17.0, *)
 #Preview {
     LoadingView(color: .black)
 }
+#endif

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct Learn: View {
     @ObservedObject var gqlViewModel: GQLViewModel
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -192,15 +193,17 @@ struct Learn: View {
     
 }
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 let allFacts: [Fact] = [
 
     Fact(color: Color.orange, title: "The Sun", subtitle: "Think Earth is the most important spot in the solar system? Think again. The sun is the real star of the show—literally!", imageName: "sun", navigaton: AnyView(SunArticle())),
-    Fact(color: Color.teal, title: "Asteroids", subtitle: "Asteroids are the rubble left over from the solar system’s formation roughly 4.6 billion years ago.", imageName: "asteroid", navigaton: AnyView(AsteroidsArticle())),
+    Fact(color: Color.teal, title: "Asteroids", subtitle: "Asteroids are the rubble left over from the solar system's formation roughly 4.6 billion years ago.", imageName: "asteroid", navigaton: AnyView(AsteroidsArticle())),
 //    Fact(color: Color.black.opacity(0.9), title: "Titan", subtitle: "Saturn's largest moon!", imageName: "moon", navigaton: IOTDView()),
     Fact(color: Color.red, title: "The Moon Landing", subtitle: "Think Earth is the most important spot in the solar system? Think again. The sun is the real star of the show—literally!", imageName: "landing", navigaton: AnyView(TheMoonLandingArticle()))
-    
+
 ]
 
+@available(iOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0, *)
 struct Fact: Identifiable {
     var id = UUID()
     var color: Color
@@ -213,6 +216,7 @@ struct Fact: Identifiable {
 
 
 
+@available(iOS 17.0, *)
 struct IOTDViewKids: View {
     @ObservedObject var viewModel: GQLViewModel
 
@@ -284,6 +288,11 @@ struct IOTDViewKids: View {
         } else {
             ProgressView("Loading...")
                 .padding()
+                .onAppear {
+                    Task {
+                        await viewModel.fetchPicture(for: nil)
+                    }
+                }
         }
     }
 }

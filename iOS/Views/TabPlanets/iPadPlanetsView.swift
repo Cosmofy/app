@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct iPadPlanetsView: View {
     var body: some View {
         NavigationStack {
@@ -49,6 +50,7 @@ struct iPadPlanetsView: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct iPadPlanetSmall: View {
     var planet: Planet
     var body: some View {
@@ -94,6 +96,7 @@ struct iPadPlanetSmall: View {
 }
 
 
+@available(iOS 17.0, *)
 #Preview {
     iPadPlanetsView()
 }
