@@ -22,23 +22,11 @@ enum Queries {
     """
 
     // MARK: Picture of the Day
-    static let picture = """
-        query Picture($date: String) {
-            picture(date: $date) {
-                date
-                title
-                credit
-                copyright
-                media
-                media_type
-                explanation {
-                    original
-                    summarized
-                    kids
-                }
-            }
-        }
-    """
+    static let picture = "query Picture($date:Date){pictures{astronomy(date:$date,limit:1){date title credit copyright media:url media_type:mediaType explanation}}}"
+
+    static let earthObservatoryPicture = "query EarthObservatoryPicture($date:Date){pictures{earthObservatory(date:$date){date title credit copyright media:url media_type:mediaType explanation}}}"
+
+    static let currentEarthObservatoryPicture = "query CurrentEarthObservatoryPicture{pictures{earthObservatory{date title credit copyright media:url media_type:mediaType explanation}}}"
 
     // MARK: Events
     static let events = """
@@ -55,7 +43,6 @@ enum Queries {
                     url
                 }
                 geometry {
-                    id
                     magnitudeValue
                     magnitudeUnit
                     date
@@ -153,6 +140,24 @@ enum Queries {
                 banner {
                     image
                     designer
+                }
+            }
+        }
+    """
+
+    // MARK: News
+    static let news = """
+        query LatestNews($limit: Int!, $offset: Int!, $ordering: NewsOrdering!) {
+            news(limit: $limit, offset: $offset, ordering: $ordering) {
+                totalCount
+                articles {
+                    id
+                    title
+                    summary
+                    url
+                    imageUrl
+                    newsSite
+                    publishedAt
                 }
             }
         }
